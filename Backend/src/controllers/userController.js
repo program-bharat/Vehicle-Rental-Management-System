@@ -4,10 +4,17 @@ const Vehicle = require('../models/Vehicles')
 exports.getAllUsers = async (req, res) => {
     try {
         const user = await User.find().select('-password');
-        res.status(200).json({ message: "All Users Fetched Successfully", user });
+        res.status(200).json({
+            success: true,
+            message: "All Users Fetched Successfully",
+            data: user
+        });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 }
 
@@ -19,12 +26,28 @@ exports.userToOwner = async (req, res) => {
             { new: true } // returns the new object with updated value
         );
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
         }
-        res.status(200).json({ message: `User Promoted to Owner`, user });
+        res.status(200).json({
+            success: true,
+            message: `User Promoted to Owner`,
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                isVerified: user.isVerified
+            }
+        });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 }
 
@@ -34,14 +57,24 @@ exports.verifyUser = async (req, res) => {
             req.params.id,
             { isVerified: true },
             { new: true }
-        )
+        ).select('-createdAt -updatedAt -__v');
         if (!user) {
-            return res.status(404).json({ message: "User Not Found" });
+            return res.status(404).json({
+                success: false,
+                message: "User Not Found"
+            });
         }
-        res.status(200).json({ message: "User verified successfully", user })
+        res.status(200).json({
+            success: true,
+            message: "User verified successfully",
+            data: user
+        })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 }
 exports.approveVehicle = async (req, res) => {
@@ -52,11 +85,21 @@ exports.approveVehicle = async (req, res) => {
             { new: true }
         )
         if (!vehicle) {
-            return res.status(404).json({ message: "Vehicle Not Found" });
+            return res.status(404).json({
+                success: false,
+                message: "Vehicle Not Found"
+            });
         }
-        res.status(200).json({ message: "Vehicle Approved Successfully", vehicle })
+        res.status(200).json({
+            success: true,
+            message: "Vehicle Approved Successfully",
+            data: vehicle
+        })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 }

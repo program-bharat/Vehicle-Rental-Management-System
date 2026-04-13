@@ -14,11 +14,14 @@ const generateToken = (user) => {
 }
 exports.register = async (req, res) => {
     try {
-        const { name, email, password, role } = req.body;
+        const { name, email, password } = req.body;
         // Check if user Exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: 'User Already Exists' });
+            return res.status(400).json({
+                success: false,
+                message: 'User Already Exists'
+            });
         }
         // hash Password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,10 +33,23 @@ exports.register = async (req, res) => {
             role: 'user',
             isVerified: false
         });
-        res.status(201).json({ message: "User Registered Successfully", user });
+        const userData = { // To hide the password in response
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+        }
+        res.status(201).json({
+            success: true,
+            message: "User Registered Successfully",
+            data: userData
+        });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 };
 
@@ -42,19 +58,35 @@ exports.login = async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid userName' });
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid email'
+            });
         }
         // Compare Password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid password' });
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid password'
+            });
         }
         res.status(200).json({
+            success: true,
             message: "Login Successful",
-            token: generateToken(user)
+            token: generateToken(user),
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
     }
 }

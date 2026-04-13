@@ -6,7 +6,8 @@ const app = express();
 const authRoute = require('./routes/authRoute')
 const vehicleRoute = require('./routes/vehicleRoute')
 const userRoute = require('./routes/userRoute')
-const bookingRoute = require('./routes/bookingRoute')
+const bookingRoute = require('./routes/bookingRoute');
+const { errorHandler } = require('./middlewares/errorMiddleware');
 
 // Middleware
 app.use(cors());
@@ -16,5 +17,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/vehicles", vehicleRoute);
 app.use("/api/users", userRoute);
 app.use("/api/bookings", bookingRoute);
+
+// Error Handler
+app.use(errorHandler)
 
 module.exports = app;
