@@ -1,24 +1,20 @@
 const User = require('../models/Users');
 const Vehicle = require('../models/Vehicles')
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req, res, next) => {
     try {
-        const user = await User.find().select('-password');
+        const user = await User.find().select('-password -createdAt -updatedAt -__v');
         res.status(200).json({
             success: true,
             message: "All Users Fetched Successfully",
             data: user
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
 
-exports.userToOwner = async (req, res) => {
+exports.userToOwner = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(
             req.params.id,
@@ -43,15 +39,11 @@ exports.userToOwner = async (req, res) => {
             }
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
 
-exports.verifyUser = async (req, res) => {
+exports.verifyUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(
             req.params.id,
@@ -70,14 +62,10 @@ exports.verifyUser = async (req, res) => {
             data: user
         })
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.approveVehicle = async (req, res) => {
+exports.approveVehicle = async (req, res, next) => {
     try {
         const vehicle = await Vehicle.findByIdAndUpdate(
             req.params.id,
@@ -96,10 +84,6 @@ exports.approveVehicle = async (req, res) => {
             data: vehicle
         })
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }

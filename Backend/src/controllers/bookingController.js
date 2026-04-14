@@ -1,7 +1,7 @@
 const Booking = require('../models/Bookings');
 const Vehicle = require('../models/Vehicles');
 
-exports.createBooking = async (req, res) => {
+exports.createBooking = async (req, res, next) => {
     try {
         const { vehicleId, startDate, endDate } = req.body;
         const today = new Date();
@@ -61,21 +61,24 @@ exports.createBooking = async (req, res) => {
             data: booking
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.getBooking = async (req, res) => {
+exports.getBooking = async (req, res, next) => {
     try {
         let bookings;
         // User can see his bookings 
         if (req.user.role === 'user') {
             bookings = await Booking.find({ userId: req.user.id })
-                .populate("userId", "-createdAt -updatedAt -__v")
-                .populate("vehicleId", "-createdAt -updatedAt -__v");
+                .populate({ path: "userId", select: "name email phone" })
+                .populate({
+                    path: "vehicleId",
+                    select: "ownerId name brand fuelType transmission pricePerDay",
+                    populate: {
+                        path: "ownerId",
+                        select: "name email phone"
+                    }
+                });
         }
         // Owner can see bookings of their vehicles 
         else if (req.user.role === 'owner') {
@@ -99,14 +102,10 @@ exports.getBooking = async (req, res) => {
             data: bookings
         })
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.updateBookingStatus = async (req, res) => {
+exports.updateBookingStatus = async (req, res, next) => {
     try {
         const { status } = req.body;
         if (!['approved', 'rejected'].includes(status)) {
@@ -134,10 +133,6 @@ exports.updateBookingStatus = async (req, res) => {
             data: booking
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }

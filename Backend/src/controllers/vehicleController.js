@@ -1,23 +1,28 @@
 const Vehicle = require('../models/Vehicles');
+const User = require("../models/Users")
 
-exports.getVehiclesById = async (req, res) => {
+exports.getVehiclesById = async (req, res, next) => {
     try {
-        const vehicles = await Vehicle.find({ ownerId: req.user.id });
+        const vehicles = await Vehicle.find({ ownerId: req.user.id })
+            .select("-__v");
         res.status(200).json({
             success: true,
             message: `Owner Vehicles Fetched Successfully`,
             data: vehicles
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.createVehicle = async (req, res) => {
+exports.createVehicle = async (req, res, next) => {
     try {
+        const user = await User.findById(req.user.id);
+        if (!user.isVerified) {
+            return res.status(403).json({
+                success: false,
+                message: "Only Verified Owners can add vehicles"
+            });
+        }
         const vehicle = await Vehicle.create({
             ownerId: req.user.id,
             ...req.body
@@ -28,14 +33,10 @@ exports.createVehicle = async (req, res) => {
             data: vehicle
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.updateVehicle = async (req, res) => {
+exports.updateVehicle = async (req, res, next) => {
     try {
         const vehicleID = req.params.id;
         const vehicle = await Vehicle.findById(vehicleID);
@@ -63,14 +64,10 @@ exports.updateVehicle = async (req, res) => {
             data: updatedVehicle
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.deleteVehicle = async (req, res) => {
+exports.deleteVehicle = async (req, res, next) => {
     try {
         const vehicleID = req.params.id;
         const vehicle = await Vehicle.findById(vehicleID);
@@ -93,14 +90,10 @@ exports.deleteVehicle = async (req, res) => {
             message: "Vehicle Deleted Successfully"
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
-exports.getPublicVehicles = async (req, res) => {
+exports.getPublicVehicles = async (req, res, next) => {
     try {
         const { type, fuelType, minPrice, maxPrice } = req.query;
         let filter = {
@@ -121,10 +114,27 @@ exports.getPublicVehicles = async (req, res) => {
             data: vehicles
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        next(error);
     }
 }
+exports.getVehicleDetails = async (req, res, next) => {
+    try {
+        const vehicleId = req.params.id;
+        const vehicle = await Vehicle.findById(vehicleId)
+            .select("-createdAt -updatedAt -__v")
+            .populate("ownerId", "-_id name email phone");
+        if (!vehicle) {
+            return res.status(404).json({
+                success: false,
+                message: "Vehicle Not Found"
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: "Vehicle details Fetched",
+            data: vehicle
+        });
+    } catch (error) {
+        next(error);
+    }
+};
