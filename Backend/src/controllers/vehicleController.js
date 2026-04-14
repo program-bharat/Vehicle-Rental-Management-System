@@ -138,3 +138,30 @@ exports.getVehicleDetails = async (req, res, next) => {
         next(error);
     }
 };
+exports.toggleAvailability = async (req, res, next) => {
+    try {
+        const vehicleId = req.params.id;
+        const vehicle = await Vehicle.findById(vehicleId);
+        if (!vehicle) {
+            return res.status(404).json({
+                success: true,
+                message: "Vehicle Not Found"
+            })
+        }
+        // OwnerShip Check
+        if (vehicle.ownerId.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "Not Authorized"
+            });
+        }
+        vehicle.availability = !vehicle.availability;
+        await vehicle.save();
+        res.status(200).json({
+            success: true,
+            message: `Vehicle: ${vehicle.availability ? "Available" : "Unavailable"}`
+        });
+    } catch (error) {
+        next(error);
+    }
+}

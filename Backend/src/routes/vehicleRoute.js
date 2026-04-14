@@ -7,7 +7,8 @@ const {
     updateVehicle,
     deleteVehicle,
     getPublicVehicles,
-    getVehicleDetails
+    getVehicleDetails,
+    toggleAvailability
 } = require('../controllers/vehicleController')
 const { protect, authorize } = require('../middlewares/authMiddleware');
 
@@ -18,5 +19,6 @@ router.get("/", protect, authorize('owner'), getVehiclesById);
 router.post("/", protect, authorize('owner'), createVehicle);
 router.put("/:id", protect, authorize('owner'), updateVehicle);
 router.delete("/:id", protect, authorize('owner'), deleteVehicle);
+router.put("/:id/availability", protect, authorize('owner'), toggleAvailability);
 
 module.exports = router;
