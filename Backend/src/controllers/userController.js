@@ -13,7 +13,32 @@ exports.getAllUsers = async (req, res, next) => {
         next(error);
     }
 }
-
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User Not Found"
+            })
+        }
+        // Admin can't delete themselves
+        if (user._id.toString() === req.user.id) {
+            return res.status(400).json({
+                success: false,
+                message: "Admin can't delete themselves"
+            })
+        }
+        await User.findByIdAndDelete(userId);
+        res.status(200).json({
+            success: true,
+            message: "User Deleted Successfully",
+        });
+    } catch (error) {
+        next(error);
+    }
+}
 exports.userToOwner = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(
@@ -42,7 +67,6 @@ exports.userToOwner = async (req, res, next) => {
         next(error);
     }
 }
-
 exports.verifyUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(
