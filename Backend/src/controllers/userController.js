@@ -1,5 +1,6 @@
 const User = require('../models/Users');
 const Vehicle = require('../models/Vehicles')
+const Booking = require('../models/Bookings')
 
 exports.getAllUsers = async (req, res, next) => {
     try {
@@ -107,6 +108,56 @@ exports.approveVehicle = async (req, res, next) => {
             message: "Vehicle Approved Successfully",
             data: vehicle
         })
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getOwnerAnalytics = async (req, res, next) => {
+    try {
+        const ownerId = req.user.id;
+        // Total Vehicles
+        const vehicles = await Vehicle.find({ ownerId });
+        const vehicleIds = vehicles.map(v => v._id);
+        if (vehicleIds.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: "Owner analytics fetched successfully",
+                data: {
+                    totalVehicles: 0,
+                    totalBookings: 0,
+                    totalRevenue: 0
+                }
+            });
+        }
+        // Total Booking
+        const totalBookings = await Booking.countDocuments({
+            vehicleId: { $in: vehicleIds }
+        });
+        // Total Revenue (only approved bookings)
+        const revenueResult = await Booking.aggregate([
+            {
+                $match: {
+                    vehicleId: { $in: vehicleIds },
+                    status: "approved"
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    totalRevenue: { $sum: "$totalPrice" }
+                }
+            }
+        ]);
+        const totalRevenue = revenueResult[0]?.totalRevenue || 0;
+        res.status(200).json({
+            success: true,
+            message: "Owner analytics fetched successfully",
+            data: {
+                totalVehicles: vehicles.length,
+                totalBookings,
+                totalRevenue
+            }
+        });
     } catch (error) {
         next(error);
     }

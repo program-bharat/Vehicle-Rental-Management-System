@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { protect, authorize } = require('../middlewares/authMiddleware');
-const { userToOwner, getAllUsers, verifyUser, approveVehicle, deleteUser } = require('../controllers/userController');
+const { userToOwner, getAllUsers, verifyUser, approveVehicle, deleteUser, getOwnerAnalytics } = require('../controllers/userController');
 
 // Admin can see all the users
 router.get("/", protect, authorize('admin'), getAllUsers);
@@ -16,5 +16,8 @@ router.put("/verify/:id", protect, authorize('admin'), verifyUser);
 router.put("/approveVehicle/:id", protect, authorize('admin'), approveVehicle);
 // Admin can delete user 
 router.delete("/:id", protect, authorize('admin'), deleteUser);
+
+// Owner Analytics
+router.get("/owner/analytics", protect, authorize('owner'), getOwnerAnalytics);
 
 module.exports = router;
