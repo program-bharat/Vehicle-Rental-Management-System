@@ -9,7 +9,7 @@ export const getVehicleDetails = (id) => {
 }
 
 // Owner
-export const getOwnerVehicles = (id) => {
+export const getOwnerVehicles = () => {
     return axiosInstance.get(`/vehicles`);
 }
 export const createVehicle = (data) => {

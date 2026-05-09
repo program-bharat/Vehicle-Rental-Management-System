@@ -1,7 +1,7 @@
 const Vehicle = require('../models/Vehicles');
 const User = require("../models/Users")
 
-exports.getVehiclesById = async (req, res, next) => {
+exports.getOwnerVehicles = async (req, res, next) => {
     try {
         const vehicles = await Vehicle.find({ ownerId: req.user.id })
             .select("-__v");
@@ -120,7 +120,10 @@ exports.getPublicVehicles = async (req, res, next) => {
 exports.getVehicleDetails = async (req, res, next) => {
     try {
         const vehicleId = req.params.id;
-        const vehicle = await Vehicle.findById(vehicleId)
+        const vehicle = await Vehicle.findOne({
+            _id: vehicleId,
+            isApproved: true
+        })
             .select("-createdAt -updatedAt -__v")
             .populate("ownerId", "-_id name email phone");
         if (!vehicle) {

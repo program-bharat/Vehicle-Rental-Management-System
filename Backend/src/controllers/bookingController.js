@@ -55,7 +55,7 @@ exports.createBooking = async (req, res, next) => {
             totalPrice,
             status: 'pending'
         });
-        res.status(200).json({
+        res.status(201).json({
             success: true,
             message: "Booking Request Sent",
             data: booking

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    getVehiclesById,
+    getOwnerVehicles,
     createVehicle,
     updateVehicle,
     deleteVehicle,
@@ -15,7 +15,7 @@ const { protect, authorize } = require('../middlewares/authMiddleware');
 router.get("/public", getPublicVehicles);
 
 router.get("/:id", getVehicleDetails);
-router.get("/", protect, authorize('owner'), getVehiclesById);
+router.get("/", protect, authorize('owner'), getOwnerVehicles);
 router.post("/", protect, authorize('owner'), createVehicle);
 router.put("/:id", protect, authorize('owner'), updateVehicle);
 router.delete("/:id", protect, authorize('owner'), deleteVehicle);

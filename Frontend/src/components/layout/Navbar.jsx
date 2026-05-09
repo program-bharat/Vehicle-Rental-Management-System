@@ -15,60 +15,62 @@ const Navbar = () => {
     };
 
     return (
-        <div className="flex items-center justify-between p-4 border-b">
-            <Link
-                to="/"
-                className="text-2xl font-bold"
-            >
-                RentiGo
-            </Link>
+        <>
+            <div className="flex items-center justify-between p-4 border-b">
+                <Link
+                    to="/"
+                    className="text-2xl font-bold"
+                >
+                    RentiGo
+                </Link>
 
-            <div className="flex items-center gap-4">
-                {
-                    token && (
-                        <Link to="/bookings">
-                            Bookings
-                        </Link>
-                    )
-                }
-                {
-                    role === "owner" && (
-                        <Link to="/owner/dashboard">
-                            Owner Dashboard
-                        </Link>
-                    )
-                }
-
-                {
-                    role === "admin" && (
-                        <Link to="/admin/dashboard">
-                            Admin Dashboard
-                        </Link>
-                    )
-                }
-
-                {
-                    token ? (
-                        <button
-                            onClick={handleLogout}
-                            className="bg-black text-white px-4 py-2 rounded cursor-pointer"
-                        >
-                            Logout
-                        </button>
-                    ) : (
-                        <>
-                            <Link to="/login">
-                                Login
+                <div className="flex items-center gap-4">
+                    {
+                        token && (
+                            <Link to="/bookings">
+                                Bookings
                             </Link>
-
-                            <Link to="/register">
-                                Register
+                        )
+                    }
+                    {
+                        role === "owner" && (
+                            <Link to="/owner/dashboard">
+                                Owner Dashboard
                             </Link>
-                        </>
-                    )
-                }
+                        )
+                    }
+
+                    {
+                        role === "admin" && (
+                            <Link to="/admin/dashboard">
+                                Admin Dashboard
+                            </Link>
+                        )
+                    }
+
+                    {
+                        token ? (
+                            <button
+                                onClick={handleLogout}
+                                className="bg-black text-white px-4 py-2 rounded cursor-pointer"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <>
+                                <Link to="/login">
+                                    Login
+                                </Link>
+
+                                <Link to="/register">
+                                    Register
+                                </Link>
+                            </>
+                        )
+                    }
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
