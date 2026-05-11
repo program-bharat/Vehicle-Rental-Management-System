@@ -27,8 +27,17 @@ const Navbar = () => {
                 <div className="flex items-center gap-4">
                     {
                         token && (
-                            <Link to="/bookings">
-                                Bookings
+                            <Link to="/my-bookings">
+                                {
+                                    role === "user"
+                                        ? "My Bookings"
+                                        : role === "owner"
+                                            ? "Booking Requests"
+                                            : role === "admin"
+                                                ? "All Bookings"
+                                                : "Bookings"
+                                }
+
                             </Link>
                         )
                     }

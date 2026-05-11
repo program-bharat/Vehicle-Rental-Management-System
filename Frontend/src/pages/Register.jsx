@@ -27,13 +27,8 @@ const Register = () => {
 
         try {
             setError("");
-
             const res = await registerUser(formData);
-
-            console.log(res.data);
-
             navigate("/login");
-
         } catch (error) {
             setError(error);
         }
@@ -96,7 +91,7 @@ const Register = () => {
 
                     <button
                         type="submit"
-                        className="bg-black text-white p-3 rounded"
+                        className="bg-black text-white p-3 rounded cursor-pointer"
                     >
                         Register
                     </button>

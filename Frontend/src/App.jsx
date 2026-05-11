@@ -8,7 +8,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VehicleDetails from "./pages/VehicleDetails";
-import Bookings from "./pages/Bookings";
+import ConfirmBooking from "./pages/ConfirmBooking";
+import MyBookings from "./pages/MyBookings";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 
@@ -32,10 +33,19 @@ const App = () => {
 
           {/* Protected Routes */}
           <Route
-            path="/bookings"
+            path="/confirm-booking"
             element={
               <PrivateRoute>
-                <Bookings />
+                <ConfirmBooking />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/my-bookings"
+            element={
+              <PrivateRoute>
+                <MyBookings />
               </PrivateRoute>
             }
           />

@@ -64,7 +64,7 @@ const VehicleDetails = () => {
             alert("Invalid date format");
             return;
         }
-        navigate("/bookings", {
+        navigate("/confirm-booking", {
             state: {
                 vehicleId: vehicle._id,
                 bookingData,
@@ -222,6 +222,7 @@ const VehicleDetails = () => {
 
                             </div>
                             <button
+                                type="button"
                                 onClick={handleBooking}
                                 disabled={!vehicle.availability}
                                 className={`w-full py-4 rounded-2xl text-lg font-semibold transition
