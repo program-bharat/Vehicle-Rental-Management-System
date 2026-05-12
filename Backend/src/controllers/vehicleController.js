@@ -25,7 +25,8 @@ exports.createVehicle = async (req, res, next) => {
         }
         const vehicle = await Vehicle.create({
             ownerId: req.user.id,
-            ...req.body
+            ...req.body,
+            image: req.file.path
         });
         res.status(201).json({
             success: true,

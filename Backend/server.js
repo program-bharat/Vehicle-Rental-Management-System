@@ -1,10 +1,11 @@
 const dotenv = require('dotenv');
+// Loading env module
+dotenv.config();
+
 // Local Module
 const connectDB = require('./src/config/db');
 const app = require('./src/app');
 
-// Loading env module
-dotenv.config();
 // Connecting to DB
 connectDB();
 
