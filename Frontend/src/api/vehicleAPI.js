@@ -12,11 +12,30 @@ export const getVehicleDetails = (id) => {
 export const getOwnerVehicles = () => {
     return axiosInstance.get(`/vehicles`);
 }
-export const createVehicle = (data) => {
-    return axiosInstance.post("/vehicles", data);
-}
+export const createVehicle = async (vehicleData) => {
+    return axiosInstance.post(
+        "/vehicles",
+        vehicleData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+};
+export const getOwnerVehicleDetails = (id) => {
+    return axiosInstance.get(`/vehicles/owner/${id}`);
+};
 export const updateVehicle = (id, data) => {
-    return axiosInstance.put(`/vehicles/${id}`, data);
+    return axiosInstance.put(
+        `/vehicles/${id}`,
+        data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
 }
 export const deleteVehicle = (id) => {
     return axiosInstance.delete(`/vehicles/${id}`);

@@ -25,16 +25,11 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             setError("");
-
             const res = await loginUser(formData);
-
             const { data: user, token } = res.data;
-
             dispatch(setCredentials({ user, token }));
-
             if (user.role === "admin") {
                 navigate("/admin/dashboard");
             }
@@ -44,7 +39,6 @@ const Login = () => {
             else {
                 navigate("/");
             }
-
         } catch (error) {
             setError(error);
         }
@@ -56,14 +50,6 @@ const Login = () => {
                 <h1 className="text-3xl font-bold mb-6 text-center">
                     Login
                 </h1>
-
-                {
-                    error && (
-                        <p className="text-red-500 mb-4">
-                            {error}
-                        </p>
-                    )
-                }
 
                 <form
                     onSubmit={handleSubmit}
@@ -95,6 +81,13 @@ const Login = () => {
                     >
                         Login
                     </button>
+                    {
+                        error && (
+                            <div className="bg-red-100 text-red-600 p-4 rounded-xl mt-5">
+                                {error}
+                            </div>
+                        )
+                    }
                 </form>
             </div>
         </>

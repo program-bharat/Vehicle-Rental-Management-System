@@ -41,14 +41,6 @@ const Register = () => {
                     Register
                 </h1>
 
-                {
-                    error && (
-                        <p className="text-red-500 mb-3">
-                            {error}
-                        </p>
-                    )
-                }
-
                 <form
                     onSubmit={handleSubmit}
                     className="flex flex-col gap-4"
@@ -95,6 +87,13 @@ const Register = () => {
                     >
                         Register
                     </button>
+                    {
+                        error && (
+                            <div className="bg-red-100 text-red-600 p-4 rounded-xl mt-5">
+                                {error}
+                            </div>
+                        )
+                    }
                 </form>
             </div>
         </>

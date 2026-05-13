@@ -97,24 +97,6 @@ const ConfirmBooking = () => {
                     Confirm Booking
                 </h1>
 
-                {/* ERROR */}
-                {
-                    error && (
-                        <div className="bg-red-100 text-red-600 p-4 rounded-xl mb-5">
-                            {error}
-                        </div>
-                    )
-                }
-
-                {/* SUCCESS */}
-                {
-                    success && (
-                        <div className="bg-green-100 text-green-700 p-4 rounded-xl mb-5">
-                            {success}
-                        </div>
-                    )
-                }
-
                 {/* CARD */}
                 <div className="border rounded-3xl overflow-hidden shadow-lg">
                     {/* IMAGE */}
@@ -194,7 +176,22 @@ const ConfirmBooking = () => {
                                     : "Confirm Booking"
                             }
                         </button>
-
+                        {/* SUCCESS */}
+                        {
+                            success && (
+                                <div className="bg-green-100 text-green-700 p-4 rounded-xl mt-5">
+                                    {success}
+                                </div>
+                            )
+                        }
+                        {/* ERROR */}
+                        {
+                            error && (
+                                <div className="bg-red-100 text-red-600 p-4 rounded-xl mt-5">
+                                    {error}
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>

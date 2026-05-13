@@ -10,7 +10,11 @@ import Register from "./pages/Register";
 import VehicleDetails from "./pages/VehicleDetails";
 import ConfirmBooking from "./pages/ConfirmBooking";
 import MyBookings from "./pages/MyBookings";
-import OwnerDashboard from "./pages/OwnerDashboard";
+import BookingRequests from "./pages/owner/BookingRequests";
+import OwnerDashboard from "./pages/owner/OwnerDashboard";
+import MyVehicles from "./pages/owner/MyVehicles";
+import EditVehicle from "./pages/owner/EditVehicle";
+import AddVehicle from "./pages/owner/AddVehicle";
 import AdminDashboard from "./pages/AdminDashboard";
 
 // Routes
@@ -59,7 +63,28 @@ const App = () => {
                 </RoleBasedRoute>
               </PrivateRoute>
             }
-          />
+          >
+            <Route
+              path="my-vehicles"
+              element={<MyVehicles />}
+            />
+            <Route
+              path="edit-vehicle/:id"
+              element={<EditVehicle />}
+            />
+            <Route
+              path="add-vehicle"
+              element={<AddVehicle />}
+            />
+            <Route
+              path="my-bookings"
+              element={<MyBookings />}
+            />
+            <Route
+              path="booking-requests"
+              element={<BookingRequests />}
+            />
+          </Route>
 
           <Route
             path="/admin/dashboard"

@@ -12,16 +12,11 @@ const MyBookings = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-
         const fetchBookings = async () => {
             try {
-
                 setLoading(true);
-
                 const res = await getBookings();
-
                 setBookings(res.data.data);
-
             } catch (error) {
                 console.log(error);
                 setError(error);
@@ -160,17 +155,13 @@ const MyBookings = () => {
                                                 </div>
                                             )
                                         }
-
                                     </div>
-
                                 </div>
                             ))
                         }
-
                     </div>
                 )
             }
-
         </div>
     );
 };

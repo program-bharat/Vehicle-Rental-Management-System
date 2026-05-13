@@ -6,7 +6,7 @@ const VehicleCard = ({ vehicle }) => {
             <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border">
                 <img
                     src={
-                        // vehicle.image ||
+                        vehicle.image ||
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnn2KTxLPv8e0YHdurBrSGLupzf18QMYrmAA&s"
                     }
                     alt={vehicle.name}
