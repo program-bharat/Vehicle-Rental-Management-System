@@ -14,6 +14,38 @@ exports.getOwnerVehicles = async (req, res, next) => {
         next(error);
     }
 }
+exports.getOwnerVehicleDetails = async (req, res, next) => {
+    try {
+
+        const vehicleId = req.params.id;
+
+        const vehicle = await Vehicle.findById(vehicleId);
+
+        if (!vehicle) {
+            return res.status(404).json({
+                success: false,
+                message: "Vehicle Not Found"
+            });
+        }
+
+        // OWNERSHIP CHECK
+        if (vehicle.ownerId.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "Not Authorized"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Owner Vehicle Details Fetched",
+            data: vehicle
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
 exports.createVehicle = async (req, res, next) => {
     try {
         const user = await User.findById(req.user.id);
@@ -54,9 +86,15 @@ exports.updateVehicle = async (req, res, next) => {
                 message: "Not Authorized"
             });
         }
+        const updateData = {
+            ...req.body,
+        };
+        if (req.file) {
+            updateData.image = req.file.path;
+        }
         const updatedVehicle = await Vehicle.findByIdAndUpdate(
             vehicleID,
-            req.body,
+            updateData,
             { new: true }
         );
         res.status(200).json({
