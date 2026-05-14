@@ -18,6 +18,6 @@ export const makeOwner = (id) => {
 }
 
 // Owner Analytics
-export const getOwnerAnalytics = () => {
-    return axiosInstance.get("/users/owner/analytics")
+export const getOwnerAnalytics = async () => {
+    return axiosInstance.get("/users/owner/analytics");
 }
