@@ -8,13 +8,8 @@ const FilterBar = ({ filters, setFilters, }) => {
     return (
         <>
             <div className="bg-white p-5 rounded-2xl shadow-md border mb-8">
-
-                <h2 className="text-2xl font-bold mb-5">
-                    Filter Vehicles
-                </h2>
-
+                <h2 className="text-2xl font-bold mb-5">Filter Vehicles</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
                     {/* TYPE */}
                     <select
                         name="type"
@@ -34,7 +29,6 @@ const FilterBar = ({ filters, setFilters, }) => {
                             4 Wheeler
                         </option>
                     </select>
-
                     {/* FUEL TYPE */}
                     <select
                         name="fuelType"
@@ -48,7 +42,6 @@ const FilterBar = ({ filters, setFilters, }) => {
                         <option value="electric">Electric</option>
                         <option value="cng">CNG</option>
                     </select>
-
                     {/* PRICE */}
                     <input
                         type="number"

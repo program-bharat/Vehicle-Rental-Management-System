@@ -8,8 +8,8 @@ const UserCard = ({ user, handleDelete, handleVerify, handleMakeOwner, }) => {
     const isCurrentAdmin = loggedInUser?.id === user._id;
     return (
         <>
-            <div className="border rounded-2xl p-5 shadow-sm">
-                <div className="space-y-2 mb-5">
+            <div className="border rounded-2xl p-5 shadow-sm flex flex-col h-full">
+                <div className="space-y-2 mb-5 flex-1">
                     <h2 className="text-2xl font-bold">
                         {user.name}
                     </h2>
@@ -29,7 +29,7 @@ const UserCard = ({ user, handleDelete, handleVerify, handleMakeOwner, }) => {
                         </span>
                     </p>
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-col gap-3 mt-auto">
                     {
                         !user.isVerified && (
                             <button

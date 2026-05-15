@@ -11,7 +11,7 @@ const VehicleForm = ({
         <>
             <form
                 onSubmit={handleSubmit}
-                className="border rounded-3xl p-8 shadow space-y-6 bg-white"
+                className="border rounded-3xl p-6 shadow space-y-2 bg-white"
             >
 
                 {/* VEHICLE NAME */}
@@ -189,7 +189,7 @@ const VehicleForm = ({
                 <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full py-4 rounded-2xl text-lg font-semibold
+                    className={`w-full py-4 mt-3 rounded-2xl text-lg font-semibold
                         ${loading
                             ? "bg-gray-400 text-white cursor-not-allowed"
                             : "bg-black text-white hover:bg-gray-800 cursor-pointer"

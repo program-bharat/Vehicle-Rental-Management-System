@@ -111,7 +111,7 @@ const VehicleDetails = () => {
                     {/* DETAILS */}
                     <div>
                         <div className="flex items-center justify-between mb-4">
-                            <h1 className="text-5xl font-bold text-gray-900">
+                            <h1 className="text-4xl font-bold text-gray-900">
                                 {vehicle.name}
                             </h1>
                             <span className="bg-black text-white px-5 py-2 rounded-full text-lg">
