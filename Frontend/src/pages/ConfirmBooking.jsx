@@ -52,12 +52,12 @@ const ConfirmBooking = () => {
     }
 
     // TOTAL DAYS
-    const totalDays =
+    const totalDays = Math.ceil(
         (
             new Date(bookingData.endDate) -
             new Date(bookingData.startDate)
-        ) /
-        (1000 * 60 * 60 * 24) + 1;
+        ) / (1000 * 60 * 60 * 24)
+    );
 
     // TOTAL PRICE
     const totalPrice = totalDays * vehicle.pricePerDay;
