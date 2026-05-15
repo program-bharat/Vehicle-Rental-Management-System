@@ -15,7 +15,9 @@ import OwnerDashboard from "./pages/owner/OwnerDashboard";
 import MyVehicles from "./pages/owner/MyVehicles";
 import EditVehicle from "./pages/owner/EditVehicle";
 import AddVehicle from "./pages/owner/AddVehicle";
-import AdminDashboard from "./pages/AdminDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ManageUsers from "./pages/admin/ManageUsers";
+import ManageVehicles from "./pages/admin/ManageVehicles";
 
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
@@ -89,14 +91,20 @@ const App = () => {
           <Route
             path="/admin/dashboard"
             element={
-              <PrivateRoute>
-                <RoleBasedRoute role="admin">
-                  <AdminDashboard />
-                </RoleBasedRoute>
-              </PrivateRoute>
+              <RoleBasedRoute role="admin">
+                <AdminDashboard />
+              </RoleBasedRoute>
             }
-          />
-
+          >
+            <Route
+              path="users"
+              element={<ManageUsers />}
+            />
+            <Route
+              path="vehicles"
+              element={<ManageVehicles />}
+            />
+          </Route>
         </Route>
       </Routes>
     </>

@@ -207,3 +207,16 @@ exports.toggleAvailability = async (req, res, next) => {
         next(error);
     }
 }
+exports.getPendingVehicles = async (req, res, next) => {
+    try {
+        const vehicles = await Vehicle.find({ isApproved: false })
+            .populate("ownerId", "name email phone");
+        res.status(200).json({
+            success: true,
+            message: "Pending Vehicles Fetched",
+            data: vehicles
+        });
+    } catch (error) {
+        next(error);
+    }
+};

@@ -19,10 +19,10 @@ router.get("/owner/analytics", protect, authorize('owner'), getOwnerAnalytics);
 router.put("/make-owner/:id", protect, authorize('admin'), userToOwner);
 
 // User --> isVerified: false->true
-router.put("/verify/:id", protect, authorize('admin'), verifyUser);
+router.put("/:id/verify", protect, authorize('admin'), verifyUser);
 
 // Vehicle --> isApproved: false->true
-router.put("/approveVehicle/:id", protect, authorize('admin'), approveVehicle);
+router.put("/vehicles/:id/approve", protect, authorize('admin'), approveVehicle);
 
 // Admin can delete user 
 router.delete("/:id", protect, authorize('admin'), deleteUser);
