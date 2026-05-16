@@ -39,37 +39,37 @@ const Navbar = () => {
     }, []);
     return (
         <>
-            <nav className="border-b bg-white sticky top-0 z-50 shadow-sm">
+            <nav className="border-b border-[#B0E4CC] bg-[#091413] sticky top-0 z-50 shadow-sm">
                 <div className="max-w-7xl mx-auto px-5 py-2 flex items-center justify-between">
                     <Link
                         to="/"
-                        className="text-3xl font-bold tracking-tight"
+                        className="text-3xl font-bold tracking-tight text-white"
                     >
                         RentiGo
                     </Link>
-                    <div className="hidden md:flex items-center gap-8 text-[16px] font-medium">
+                    <div className="hidden md:flex items-center gap-8 text-[16px] font-medium text-white">
 
                         <Link
                             to="/"
-                            className="hover:text-gray-500 transition"
+                            className="text-white hover:text-[#408A71] transition"
                         >
                             Home
                         </Link>
                         <Link
                             to="/vehicles"
-                            className="hover:text-gray-500 transition"
+                            className="text-white hover:text-[#408A71] transition"
                         >
                             Explore
                         </Link>
                         <Link
                             to="/about"
-                            className="hover:text-gray-500 transition"
+                            className="text-white hover:text-[#408A71] transition"
                         >
                             About
                         </Link>
                         <Link
                             to="/contact"
-                            className="hover:text-gray-500 transition"
+                            className="text-white hover:text-[#408A71] transition"
                         >
                             Contact
                         </Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
                             role === "owner" && (
                                 <Link
                                     to="/owner/dashboard"
-                                    className="hover:text-gray-500 transition"
+                                    className="text-white hover:text-[#408A71] transition"
                                 >
                                     Dashboard
                                 </Link>
@@ -87,7 +87,7 @@ const Navbar = () => {
                             role === "admin" && (
                                 <Link
                                     to="/admin/dashboard"
-                                    className="hover:text-gray-500 transition"
+                                    className="text-white hover:text-[#408A71] transition"
                                 >
                                     Dashboard
                                 </Link>
@@ -95,7 +95,7 @@ const Navbar = () => {
                         }
                     </div>
                     {/* RIGHT SECTION */}
-                    <div className="flex items-center justify-center gap-4">
+                    <div className="flex items-center justify-center gap-4 text-white">
                         {
                             token ? (
                                 <div ref={profileRef} className="relative">
@@ -103,30 +103,30 @@ const Navbar = () => {
                                         onClick={() => setProfileOpen(!profileOpen)}
                                         className="flex items-center justify-center cursor-pointer"
                                     >
-                                        <FaUserCircle className="text-[26px]" />
+                                        <FaUserCircle className="text-[26px] text-white" />
                                     </button>
                                     {
                                         profileOpen && (
-                                            <div className="absolute right-0 top-14 w-64 bg-white border rounded-2xl shadow-lg p-5">
+                                            <div className="absolute right-0 top-14 w-64 bg-[#091413] border border-[#285A48] rounded-2xl shadow-lg p-5 text-white">
 
-                                                <div className="border-b pb-4 mb-4">
+                                                <div className="border-b border-[#285A48] pb-4 mb-4">
                                                     <h2 className="text-xl font-bold">
                                                         {user?.name}
                                                     </h2>
-                                                    <p className="text-gray-500 capitalize">
+                                                    <p className="text-[#408A71] capitalize">
                                                         {role}
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col gap-3">
                                                     <button
                                                         onClick={() => navigate("/profile")}
-                                                        className="bg-black text-white py-2 rounded-xl cursor-pointer"
+                                                        className="bg-[#091413] hover:bg-[#285A48] text-white py-2 rounded-xl transition cursor-pointer"
                                                     >
                                                         Profile
                                                     </button>
                                                     <button
                                                         onClick={handleLogout}
-                                                        className="border py-2 rounded-xl cursor-pointer"
+                                                        className="border border-[#285A48] hover:bg-[#285A48] text-white py-2 rounded-xl transition cursor-pointer"
                                                     >
                                                         Logout
                                                     </button>
@@ -140,13 +140,13 @@ const Navbar = () => {
                                 <div className="hidden md:flex items-center gap-4">
                                     <Link
                                         to="/login"
-                                        className="hover:text-gray-500 transition"
+                                        className="text-white hover:text-[#408A71] transition"
                                     >
                                         Login
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="bg-black text-white px-5 py-2 rounded-xl hover:bg-gray-800 transition"
+                                        className="bg-[#091413] text-white px-5 py-2 rounded-xl hover:bg-[#285A48] transition"
                                     >
                                         Register
                                     </Link>
@@ -157,7 +157,7 @@ const Navbar = () => {
                         {/* MOBILE MENU BUTTON */}
                         <button
                             onClick={() => setMenuOpen(!menuOpen)}
-                            className="md:hidden text-2xl"
+                            className="md:hidden text-2xl text-white"
                         >
                             {
                                 menuOpen
@@ -170,7 +170,7 @@ const Navbar = () => {
                 {/* MOBILE MENU */}
                 {
                     menuOpen && (
-                        <div ref={menuRef} className="md:hidden border-t px-5 py-5 bg-white">
+                        <div ref={menuRef} className="md:hidden border-t border-[#285A48] px-5 py-5 bg-[#091413] text-white">
                             <div className="flex flex-col gap-5 text-lg">
                                 <Link to="/">
                                     Home
