@@ -1,96 +1,288 @@
-import { useEffect, useMemo, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useEffect, useState } from "react";
 import { getPublicVehicles } from "../api/vehicleAPI";
 import { setVehicles } from "../rtk/slices/vehicleSlice";
-
 import VehicleCard from "../components/vehicle/VehicleCard";
-import FilterBar from "../components/vehicle/FilterBar";
-
 const Home = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { vehicles } = useSelector((state) => state.vehicle);
-    const [loading, setLoading] = useState(true);
-    const [filters, setFilters] = useState({
+    const [quickSearch, setQuickSearch] = useState({
         type: "",
-        fuelType: "",
-        maxPrice: "",
+        date: "",
     });
-
-    // FETCH VEHICLES
     useEffect(() => {
         const fetchVehicles = async () => {
             try {
-                setLoading(true);
                 const res = await getPublicVehicles();
                 dispatch(setVehicles(res.data.data));
             } catch (error) {
                 console.log(error);
-            } finally {
-                setLoading(false);
             }
         };
         fetchVehicles();
     }, [dispatch]);
-
-    // FILTER VEHICLES
-    const filteredVehicles = useMemo(() => {
-        return vehicles.filter((vehicle) => {
-            const matchType =
-                filters.type === "" ||
-                vehicle.type === filters.type;
-            const matchFuel =
-                filters.fuelType === "" ||
-                vehicle.fuelType?.toLowerCase() === filters.fuelType.toLowerCase();
-            const matchPrice =
-                filters.maxPrice === "" ||
-                vehicle.pricePerDay <= Number(filters.maxPrice);
-            return matchType && matchFuel && matchPrice;
+    const handleQuickSearch = () => {
+        navigate("/explore", {
+            state: {
+                type: quickSearch.type,
+                date: quickSearch.date,
+            },
         });
-    }, [vehicles, filters]);
-
+    };
     return (
         <>
             <div className="bg-gray-50 min-h-screen">
                 {/* HERO SECTION */}
-                <div className="bg-black text-white rounded-3xl p-10 mb-10">
-                    <h1 className="text-4xl font-bold mb-4">
-                        Rent Premium Vehicles Easily
-                    </h1>
-                    <p className="text-lg text-gray-300 max-w-2xl">
-                        Explore cars, bikes, and SUVs from trusted owners at affordable prices.
-                    </p>
-                </div>
+                <section className="bg-[#091413] text-white rounded-3xl px-8 py-16 mb-14">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                        {/* LEFT */}
+                        <div>
+                            <p className="text-[#B0E4CC] font-semibold mb-4">
+                                Premium Vehicle Rental Platform
+                            </p>
+                            <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                                Rent Your Perfect Ride Anytime
+                            </h1>
+                            <p className="text-gray-300 text-lg leading-8 mb-8">
+                                Explore premium cars, bikes, and SUVs from trusted owners
+                                at affordable daily rental prices.
+                            </p>
+                            <div className="flex flex-wrap gap-4">
+                                <Link
+                                    to="/explore"
+                                    className="bg-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition"
+                                >
+                                    Explore Vehicles
+                                </Link>
+                                <Link
+                                    to="/register"
+                                    className="border border-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition"
+                                >
+                                    Become Owner
+                                </Link>
+                            </div>
 
-                {/* FILTER BAR */}
-                <FilterBar
-                    filters={filters}
-                    setFilters={setFilters}
-                />
-
-                {/* VEHICLE GRID */}
-                {
-                    loading ? (
-                        <div className="text-center text-2xl font-semibold py-20">
-                            Loading Vehicles...
                         </div>
-                    ) : filteredVehicles.length === 0 ? (
-                        <div className="text-center text-2xl font-semibold py-20">
-                            No Vehicles Found
+                        {/* RIGHT */}
+                        <div>
+                            <img
+                                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+                                // src="https://images.unsplash.com/photo-1603189617530-6d32306f57c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJtd3xlbnwwfHwwfHx8MA%3D%3D"
+                                alt="Vehicle"
+                                className="rounded-3xl h-[450px] w-full object-cover"
+                            />
                         </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {
-                                filteredVehicles.map((vehicle) => (
+                    </div>
+                </section>
+                {/* FEATURED VEHICLES */}
+                <section className="mb-20">
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 className="text-4xl font-bold text-[#091413] mb-2">
+                                Featured Vehicles
+                            </h2>
+                            <p className="text-gray-500">
+                                Most popular rental vehicles
+                            </p>
+                        </div>
+                        <Link
+                            to="/explore"
+                            className="text-[#285A48] font-semibold"
+                        >
+                            View All Vehicles
+                        </Link>
+                    </div>
+                    {/* VEHICLE CARDS GRID HERE */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        {/* {
+                            vehicles
+                                ?.slice(1, 5)
+                                .map((vehicle) => (
                                     <VehicleCard
                                         key={vehicle._id}
                                         vehicle={vehicle}
                                     />
                                 ))
-                            }
+                        } */}
+                        {
+                            [...vehicles]
+                                .sort(() => Math.random() - 0.5)
+                                .slice(0, 4)
+                                .map((vehicle) => (
+                                    <VehicleCard
+                                        key={vehicle._id}
+                                        vehicle={vehicle}
+                                    />
+                                ))
+                        }   
+                    </div>
+                </section>
+                {/* WHY CHOOSE US */}
+                <section className="mb-20">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold text-[#091413] mb-3">
+                            Why Choose RentiGo
+                        </h2>
+                        <p className="text-gray-500">
+                            Trusted by thousands of customers
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                            <h3 className="text-2xl font-bold mb-3">
+                                Easy Booking
+                            </h3>
+                            <p className="text-gray-500 leading-7">
+                                Simple and fast vehicle booking experience.
+                            </p>
                         </div>
-                    )
-                }
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                            <h3 className="text-2xl font-bold mb-3">
+                                Verified Vehicles
+                            </h3>
+                            <p className="text-gray-500 leading-7">
+                                Trusted and verified owners and vehicles.
+                            </p>
+                        </div>
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                            <h3 className="text-2xl font-bold mb-3">
+                                Affordable Pricing
+                            </h3>
+                            <p className="text-gray-500 leading-7">
+                                Best pricing for daily and weekly rentals.
+                            </p>
+                        </div>
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                            <h3 className="text-2xl font-bold mb-3">
+                                24/7 Support
+                            </h3>
+                            <p className="text-gray-500 leading-7">
+                                Dedicated customer support anytime.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* VEHICLE CATEGORIES */}
+                <section className="mb-20">
+                    <h2 className="text-4xl font-bold text-[#091413] mb-10 text-center">
+                        Vehicle Categories
+                    </h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                            Cars
+                        </div>
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                            Bikes
+                        </div>
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                            SUVs
+                        </div>
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                            Sports Bikes
+                        </div>
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                            Luxury Vehicles
+                        </div>
+                    </div>
+                </section>
+
+                {/* TESTIMONIALS */}
+                <section className="mb-20">
+                    <h2 className="text-4xl font-bold text-center text-[#091413] mb-12">
+                        What Customers Say
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px]">
+                            <p className="text-gray-600 leading-7 italic">
+                                "Amazing rental experience and smooth booking process."
+                            </p>
+                            <h3 className="font-semibold text-[#285A48] text-right mt-auto">
+                                — Rahul
+                            </h3>
+                        </div>
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px]">
+                            <p className="text-gray-600 leading-7 italic">
+                                "Clean vehicles and affordable pricing."
+                            </p>
+                            <h3 className="font-semibold text-[#285A48] text-right mt-auto">
+                                — Shubham
+                            </h3>
+                        </div>
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px]">
+                            <p className="text-gray-600 leading-7 italic">
+                                "One of the best rental platforms I have used."
+                            </p>
+                            <h3 className="font-semibold text-[#285A48] text-right mt-auto">
+                                — Shivam
+                            </h3>
+                        </div>
+                    </div>
+                </section>
+
+                {/* STATS SECTION */}
+                <section className="bg-[#091413] rounded-3xl text-white px-8 py-14 mb-20">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                        <div>
+                            <h2 className="text-5xl font-bold mb-3">
+                                500+
+                            </h2>
+                            <p className="text-gray-300">
+                                Vehicles
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="text-5xl font-bold mb-3">
+                                10K+
+                            </h2>
+                            <p className="text-gray-300">
+                                Happy Customers
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="text-5xl font-bold mb-3">
+                                25+
+                            </h2>
+                            <p className="text-gray-300">
+                                Cities
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="text-5xl font-bold mb-3">
+                                15K+
+                            </h2>
+                            <p className="text-gray-300">
+                                Successful Bookings
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* CTA SECTION */}
+                <section className="bg-white border border-[#D6EFE3] rounded-3xl px-8 py-16 text-center">
+                    <h2 className="text-5xl font-bold text-[#091413] mb-5">
+                        Ready To Book Your Next Ride?
+                    </h2>
+                    <p className="text-gray-500 text-lg mb-8">
+                        Explore premium vehicles and book instantly.
+                    </p>
+                    <div className="flex items-center justify-center flex-wrap gap-5">
+                        <Link
+                            to="/explore"
+                            className="bg-[#091413] hover:bg-[#285A48] text-white px-7 py-3 rounded-xl transition"
+                        >
+                            Explore Vehicles
+                        </Link>
+                        <Link
+                            to="/register"
+                            className="border border-[#091413] text-[#091413] hover:bg-[#091413] hover:text-white px-7 py-3 rounded-xl transition"
+                        >
+                            Register Now
+                        </Link>
+                    </div>
+                </section>
             </div>
         </>
     );

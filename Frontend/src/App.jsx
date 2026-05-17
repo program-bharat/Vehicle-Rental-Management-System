@@ -4,7 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 
 // Pages
+import ScrollToTop from "./components/common/ScrollToTop";
 import Home from "./pages/Home";
+import Explore from "./pages/Explore";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VehicleDetails from "./pages/VehicleDetails";
@@ -26,6 +28,7 @@ import RoleBasedRoute from "./routes/RoleBasedRoute";
 const App = () => {
   return (
     <>
+      <ScrollToTop />
       <Routes>
 
         {/* ALL pages now use MainLayout */}
@@ -33,6 +36,7 @@ const App = () => {
 
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/vehicle/:id" element={<VehicleDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

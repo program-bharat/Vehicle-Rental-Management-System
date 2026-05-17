@@ -56,7 +56,7 @@ const Navbar = () => {
                             Home
                         </Link>
                         <Link
-                            to="/vehicles"
+                            to="/explore"
                             className="text-white hover:text-[#408A71] transition"
                         >
                             Explore
@@ -175,7 +175,7 @@ const Navbar = () => {
                                 <Link to="/">
                                     Home
                                 </Link>
-                                <Link to="/vehicles">
+                                <Link to="/explore">
                                     Explore
                                 </Link>
                                 <Link to="/about">
