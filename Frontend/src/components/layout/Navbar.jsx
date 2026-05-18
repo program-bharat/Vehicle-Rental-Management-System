@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
@@ -9,6 +9,7 @@ import { logout } from "../../rtk/slices/authSlice";
 const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { token, role, user } = useSelector((state) => state.auth);
 
@@ -37,6 +38,10 @@ const Navbar = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+    useEffect(() => {
+        setMenuOpen(false);
+        setProfileOpen(false);
+    }, [location.pathname]);
     return (
         <>
             <nav className="border-b border-[#B0E4CC] bg-[#091413] sticky top-0 z-50 shadow-sm">

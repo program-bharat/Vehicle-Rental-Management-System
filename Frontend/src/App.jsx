@@ -7,6 +7,8 @@ import MainLayout from "./components/layout/MainLayout";
 import ScrollToTop from "./components/common/ScrollToTop";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VehicleDetails from "./pages/VehicleDetails";
@@ -37,6 +39,8 @@ const App = () => {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/vehicle/:id" element={<VehicleDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
