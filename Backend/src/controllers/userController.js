@@ -162,3 +162,55 @@ exports.getOwnerAnalytics = async (req, res, next) => {
         next(error);
     }
 }
+// GET LOGGED IN USER
+exports.getMyProfile = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id)
+            .select("-password -updatedAt -__v");
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: "Profile data fetched successfully",
+            data: user
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// UPDATE PROFILE
+exports.updateProfile = async (req, res, next) => {
+    try {
+        const { name, phone } = req.body;
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        user.name = name || user.name;
+        user.phone = phone || user.phone;
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: "Profile updated successfully",
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                role: user.role,
+                isVerified: user.isVerified,
+                createdAt: user.createdAt
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+};

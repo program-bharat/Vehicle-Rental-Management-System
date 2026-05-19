@@ -6,8 +6,14 @@ const { userToOwner,
     verifyUser,
     approveVehicle,
     deleteUser,
-    getOwnerAnalytics
+    getOwnerAnalytics,
+    getMyProfile,
+    updateProfile
 } = require('../controllers/userController');
+
+// USER PROFILE
+router.get("/profile/me", protect, getMyProfile);
+router.put("/profile/update", protect, updateProfile);
 
 // Admin can see all the users
 router.get("/", protect, authorize('admin'), getAllUsers);

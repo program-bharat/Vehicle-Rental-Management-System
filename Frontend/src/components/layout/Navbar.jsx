@@ -89,6 +89,16 @@ const Navbar = () => {
                             )
                         }
                         {
+                            role === "user" && (
+                                <Link
+                                    to="/my-bookings"
+                                    className="text-white hover:text-[#408A71] transition"
+                                >
+                                    My Bookings
+                                </Link>
+                            )
+                        }
+                        {
                             role === "admin" && (
                                 <Link
                                     to="/admin/dashboard"
@@ -193,6 +203,13 @@ const Navbar = () => {
                                     role === "owner" && (
                                         <Link to="/owner/dashboard">
                                             Dashboard
+                                        </Link>
+                                    )
+                                }
+                                {
+                                    role === "user" && (
+                                        <Link to="/my-bookings">
+                                            My Bookings
                                         </Link>
                                     )
                                 }

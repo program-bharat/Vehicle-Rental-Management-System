@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VehicleDetails from "./pages/VehicleDetails";
@@ -63,7 +64,14 @@ const App = () => {
               </PrivateRoute>
             }
           />
-
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/owner/dashboard"
             element={
