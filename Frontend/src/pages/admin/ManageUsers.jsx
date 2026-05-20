@@ -4,7 +4,8 @@ import {
     getAllUsers,
     deleteUser,
     verifyUser,
-    makeOwner,
+    approveOwnerRequest,
+    rejectOwnerRequest,
 } from "../../api/adminAPI";
 
 import UserCard from "../../components/admin/UserCard";
@@ -44,9 +45,18 @@ const ManageUsers = () => {
             console.log(error);
         }
     };
-    const handleMakeOwner = async (id) => {
+    const handleApproveOwner = async (id) => {
         try {
-            await makeOwner(id);
+            await approveOwnerRequest(id);
+            fetchUsers();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleRejectOwner = async (id) => {
+        try {
+            await rejectOwnerRequest(id);
             fetchUsers();
         } catch (error) {
             console.log(error);
@@ -61,7 +71,7 @@ const ManageUsers = () => {
     }
     return (
         <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
                     users.map((user) => (
                         <UserCard
@@ -69,7 +79,8 @@ const ManageUsers = () => {
                             user={user}
                             handleDelete={handleDelete}
                             handleVerify={handleVerify}
-                            handleMakeOwner={handleMakeOwner}
+                            handleApproveOwner={handleApproveOwner}
+                            handleRejectOwner={handleRejectOwner}
                         />
                     ))
                 }

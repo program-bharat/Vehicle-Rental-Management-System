@@ -28,6 +28,15 @@ const userSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    ownerRequestStatus: {
+        type: String,
+        enum: ['none', 'pending', 'approved', 'rejected'],
+        default: 'none'
+    },
+    ownerRequestSeen: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 

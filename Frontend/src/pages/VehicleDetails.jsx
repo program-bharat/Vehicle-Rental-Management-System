@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -55,13 +56,13 @@ const VehicleDetails = () => {
     // BOOKING BUTTON
     const handleBooking = () => {
         if (!bookingData.startDate || !bookingData.endDate) {
-            alert("Please select booking dates");
+            toast.warning("Please select booking dates");
             return;
         }
         const startYear = bookingData.startDate.split("-")[0];
         const endYear = bookingData.endDate.split("-")[0];
         if (startYear.length !== 4 || endYear.length !== 4) {
-            alert("Invalid date format");
+            toast.error("Invalid date format");
             return;
         }
         navigate("/confirm-booking", {

@@ -13,8 +13,12 @@ export const verifyUser = (id) => {
     return axiosInstance.put(`/users/${id}/verify`);
 };
 
-export const makeOwner = (id) => {
-    return axiosInstance.put(`/users/make-owner/${id}`);
+export const approveOwnerRequest = (id) => {
+    return axiosInstance.put(`/users/owner-request/${id}/approve`);
+};
+
+export const rejectOwnerRequest = (id) => {
+    return axiosInstance.put(`/users/owner-request/${id}/reject`);
 };
 
 // VEHICLES

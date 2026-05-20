@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import { createBooking } from "../api/bookingAPI";
 import { getVehicleDetails } from "../api/vehicleAPI";
@@ -13,8 +14,8 @@ const ConfirmBooking = () => {
 
     const [loading, setLoading] = useState(false);
     const [vehicle, setVehicle] = useState(null);
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+    // const [error, setError] = useState("");
+    // const [success, setSuccess] = useState("");
 
     useEffect(() => {
         const fetchVehicle = async () => {
@@ -66,25 +67,20 @@ const ConfirmBooking = () => {
     const handleConfirmBooking = async () => {
         try {
             setLoading(true);
-            setError("");
-            setSuccess("");
-
             const payload = {
                 vehicleId: vehicle._id,
                 startDate: bookingData.startDate,
                 endDate: bookingData.endDate,
             };
-
             const res = await createBooking(payload);
-
-            setSuccess(res.data.message || "Booking Created Successfully");
-
+            toast.success(
+                res.data.message || "Booking created successfully"
+            );
             setTimeout(() => {
                 navigate("/my-bookings");
-            }, 2000);
-
+            }, 1500);
         } catch (error) {
-            setError(error);
+            toast.error(error || "Booking failed");
         } finally {
             setLoading(false);
         }
@@ -179,21 +175,21 @@ const ConfirmBooking = () => {
                             }
                         </button>
                         {/* SUCCESS */}
-                        {
+                        {/* {
                             success && (
                                 <div className="bg-green-100 text-green-700 p-4 rounded-xl mt-5">
                                     {success}
                                 </div>
                             )
-                        }
+                        } */}
                         {/* ERROR */}
-                        {
+                        {/* {
                             error && (
                                 <div className="bg-red-100 text-red-600 p-4 rounded-xl mt-5">
                                     {error}
                                 </div>
                             )
-                        }
+                        } */}
                     </div>
                 </div>
             </div>

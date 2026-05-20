@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 import { getBookings } from "../api/bookingAPI";
 import { logout, setCredentials } from "../rtk/slices/authSlice";
-import { updateProfile, getMyProfile } from "../api/userAPI";
+import { updateProfile, getMyProfile, markOwnerRequestSeen } from "../api/userAPI";
 import {
     FaUserCircle, FaEnvelope, FaPhoneAlt, FaCalendarAlt, FaCheckCircle, FaCar, FaClipboardList, FaKey,
     FaSignOutAlt, FaChartBar, FaSave,
@@ -16,6 +17,7 @@ const Profile = () => {
     const [loading, setLoading] = useState(false);
     const [bookings, setBookings] = useState([]);
     const [showPasswordSection, setShowPasswordSection] = useState(false);
+    const ownerToastShown = useRef(false);
     const [passwordData, setPasswordData] = useState({
         currentPassword: "",
         newPassword: "",
@@ -55,14 +57,29 @@ const Profile = () => {
                     user: res.data.data,
                 })
             );
-            alert(res.data.message);
+            toast.success(res.data.message);
         } catch (error) {
-            alert(error);
+            toast.error(error);
         } finally {
             setLoading(false);
         }
     };
-
+    useEffect(() => {
+        if (ownerToastShown.current) return;
+        const showOwnerToast = async () => {
+            if (!user?.ownerRequestSeen && user?.ownerRequestStatus === "approved") {
+                ownerToastShown.current = true;
+                toast.success("Your owner request has been approved. You are now an owner.");
+                await markOwnerRequestSeen();
+            }
+            else if (!user?.ownerRequestSeen && user?.ownerRequestStatus === "rejected") {
+                ownerToastShown.current = true;
+                toast.error("Your owner request was rejected by admin.");
+                await markOwnerRequestSeen();
+            }
+        };
+        showOwnerToast();
+    }, [user]);
     useEffect(() => {
         const fetchBookings = async () => {
             try {
@@ -126,7 +143,13 @@ const Profile = () => {
                         Manage your account information and activity
                     </p>
                 </section>
-
+                {
+                    user?.ownerRequestStatus === "pending" && (
+                        <div className="mb-8 bg-yellow-100 text-yellow-700 px-4 py-3 rounded-xl">
+                            Your owner request is pending admin approval.
+                        </div>
+                    )
+                }
                 {/* PROFILE HEADER CARD */}
                 <section className="bg-white border border-[#D6EFE3] rounded-3xl p-8 mb-12">
                     <div className="flex flex-col sm:flex-row md:items-center gap-8">

@@ -40,34 +40,95 @@ exports.deleteUser = async (req, res, next) => {
         next(error);
     }
 }
-exports.userToOwner = async (req, res, next) => {
+// USER REQUEST OWNER ROLE
+exports.requestOwnerRole = async (req, res, next) => {
     try {
-        const user = await User.findByIdAndUpdate(
-            req.params.id,
-            { role: 'owner' },
-            { new: true } // returns the new object with updated value
-        );
+        const user = await User.findById(req.user.id);
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: 'User not found'
+                message: "User not found"
             });
         }
+        if (user.role === "owner") {
+            return res.status(400).json({
+                success: false,
+                message: "You are already an owner"
+            });
+        }
+        if (user.ownerRequestStatus === "pending") {
+            return res.status(400).json({
+                success: false,
+                message: "Owner request already pending"
+            });
+        }
+        user.ownerRequestStatus = "pending";
+        await user.save();
         res.status(200).json({
             success: true,
-            message: `User Promoted to Owner`,
-            data: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                role: user.role,
-                isVerified: user.isVerified
-            }
+            message: "Owner request sent successfully"
         });
     } catch (error) {
         next(error);
     }
-}
+};
+// ADMIN APPROVE OWNER REQUEST
+exports.approveOwnerRequest = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        user.role = "owner";
+        user.ownerRequestStatus = "approved";
+        user.ownerRequestSeen = false;
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: "Owner request approved successfully",
+            data: user
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+// ADMIN REJECT OWNER REQUEST
+exports.rejectOwnerRequest = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        user.ownerRequestStatus = "rejected";
+        user.ownerRequestSeen = false;
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: "Owner request rejected successfully"
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+exports.markOwnerRequestSeen = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id);
+        user.ownerRequestSeen = true;
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: "Owner request notification marked as seen"
+        });
+    } catch (error) {
+        next(error);
+    }
+};
 exports.verifyUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(

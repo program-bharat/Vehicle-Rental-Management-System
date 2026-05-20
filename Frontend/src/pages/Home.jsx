@@ -1,6 +1,8 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { requestOwnerRole } from "../api/userAPI";
 import { getPublicVehicles } from "../api/vehicleAPI";
 import { setVehicles } from "../rtk/slices/vehicleSlice";
 import VehicleCard from "../components/vehicle/VehicleCard";
@@ -31,6 +33,14 @@ const Home = () => {
             },
         });
     };
+    const handleBecomeOwner = async () => {
+        try {
+            const res = await requestOwnerRole();
+            toast.success("Owner request sent successfully");
+        } catch (error) {
+            toast.warning("You have already requested owner access");
+        }
+    };
     return (
         <>
             <div className="bg-gray-50 min-h-screen">
@@ -56,12 +66,12 @@ const Home = () => {
                                 >
                                     Explore Vehicles
                                 </Link>
-                                <Link
-                                    to="/register"
-                                    className="border border-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition"
+                                <button
+                                    onClick={handleBecomeOwner}
+                                    className="border border-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition cursor-pointer"
                                 >
                                     Become Owner
-                                </Link>
+                                </button>
                             </div>
 
                         </div>

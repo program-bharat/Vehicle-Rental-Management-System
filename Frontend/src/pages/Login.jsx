@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { loginUser } from "../api/authAPI";
 import { setCredentials } from "../rtk/slices/authSlice";
@@ -12,28 +13,20 @@ const Login = () => {
         email: "",
         password: "",
     });
-    const [errors, setErrors] = useState({
-        email: "",
-        password: "",
-    });
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
-        setErrors({
-            ...errors,
-            [e.target.name]: "",
-        });
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            setErrors({
-                email: "",
-                password: "",
-            });
             const res = await loginUser(formData);
+            toast.success("Login successful", {
+                position: "top-right",
+                autoClose: 3000,
+            });
             const user = res.data.data;
             const token = res.data.token;
             dispatch(setCredentials({ user, token }));
@@ -48,19 +41,16 @@ const Login = () => {
             }
         } catch (error) {
             if (error === "Invalid email") {
-                setErrors({
-                    email: "Invalid email",
-                    password: "",
-                });
+                toast.error("Invalid email");
             }
             else if (error === "Invalid password") {
-                setErrors({
-                    email: "",
-                    password: "Invalid password",
-                });
+                toast.error("Invalid password");
+            }
+            else {
+                toast.error("Login failed");
             }
         }
-    };
+    }
     return (
         <>
             <div className="min-h-[75vh] md:min-h-[75vh] lg:min-h-[85vh] flex items-center justify-center">
@@ -84,19 +74,9 @@ const Login = () => {
                                 placeholder="Enter Email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`w-full border p-3 rounded-xl outline-none text-[#091413] transition ${errors.email
-                                    ? "border-red-500 focus:ring-2 focus:ring-red-200"
-                                    : "border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC]"
-                                    }`}
+                                className="w-full border border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC] p-3 rounded-xl outline-none transition"
                                 required
                             />
-                            {
-                                errors.email && (
-                                    <p className="text-red-600 text-sm mt-1 ml-1 block">
-                                        {errors.email}
-                                    </p>
-                                )
-                            }
                         </div>
                         <div>
                             <input
@@ -105,19 +85,9 @@ const Login = () => {
                                 placeholder="Enter Password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className={`w-full border p-3 rounded-xl outline-none transition ${errors.password
-                                    ? "border-red-500 focus:ring-2 focus:ring-red-200"
-                                    : "border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC]"
-                                    }`}
+                                className="w-full border border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC] p-3 rounded-xl outline-none transition"
                                 required
                             />
-                            {
-                                errors.password && (
-                                    <p className="text-red-600 text-sm mt-1 ml-1 block">
-                                        {errors.password}
-                                    </p>
-                                )
-                            }
                         </div>
                         <button
                             type="submit"

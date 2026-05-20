@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { registerUser } from "../api/authAPI";
 
 const Register = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -12,8 +14,6 @@ const Register = () => {
         phone: "",
         password: "",
     });
-
-    const [error, setError] = useState("");
 
     const handleChange = (e) => {
         setFormData({
@@ -24,13 +24,19 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            setError("");
-            const res = await registerUser(formData);
-            navigate("/login");
+            setLoading(true);
+            await registerUser(formData);
+            toast.success("Account created successfully");
+            setTimeout(() => {
+                navigate("/login");
+            }, 1500);
         } catch (error) {
-            setError(error);
+            toast.error(
+                error?.response?.data?.message || "Registration failed"
+            );
+        } finally {
+            setLoading(false);
         }
     };
     return (
@@ -56,6 +62,7 @@ const Register = () => {
                             value={formData.name}
                             onChange={handleChange}
                             className="border border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC] p-3 rounded-xl outline-none transition"
+                            required
                         />
                         <input
                             type="email"
@@ -64,28 +71,37 @@ const Register = () => {
                             value={formData.email}
                             onChange={handleChange}
                             className="border border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC] p-3 rounded-xl outline-none transition"
+                            required
                         />
                         <input
-                            type="text"
+                            type="tel"
                             name="phone"
                             placeholder="Enter Phone"
                             value={formData.phone}
                             onChange={handleChange}
                             className="border border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC] p-3 rounded-xl outline-none transition"
+                            required
                         />
                         <input
                             type="password"
                             name="password"
                             placeholder="Enter Password"
+                            minLength={6}
                             value={formData.password}
                             onChange={handleChange}
                             className="border border-[#B0E4CC] focus:border-[#408A71] focus:ring-2 focus:ring-[#B0E4CC] p-3 rounded-xl outline-none transition"
+                            required
                         />
                         <button
                             type="submit"
-                            className="bg-[#091413] hover:bg-[#285A48] text-white p-3 rounded-xl transition cursor-pointer"
+                            disabled={loading}
+                            className="bg-[#091413] hover:bg-[#285A48] text-white p-3 rounded-xl transition cursor-pointer disabled:opacity-60"
                         >
-                            Create Account
+                            {
+                                loading
+                                    ? "Creating Account..."
+                                    : "Create Account"
+                            }
                         </button>
                         <div className="text-center text-sm text-gray-600">
                             Already have an account?{" "}
@@ -96,13 +112,6 @@ const Register = () => {
                                 Login
                             </Link>
                         </div>
-                        {
-                            error && (
-                                <div className="bg-red-100 text-red-600 p-4 rounded-xl mt-5">
-                                    {error}
-                                </div>
-                            )
-                        }
                     </form>
                 </div>
             </div>

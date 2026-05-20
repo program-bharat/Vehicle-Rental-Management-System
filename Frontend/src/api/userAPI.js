@@ -20,10 +20,12 @@ export const verifyUser = (id) => {
 export const approveVehicle = (id) => {
     return axiosInstance.put(`/users/vehicles/${id}/approve`);
 }
-export const makeOwner = (id) => {
-    return axiosInstance.put(`/users/make-owner/${id}`);
-}
-
+export const requestOwnerRole = () => {
+    return axiosInstance.put("/users/request-owner");
+};
+export const markOwnerRequestSeen = async () => {
+    return axiosInstance.put("/users/owner-request/seen");
+};
 // Owner Analytics
 export const getOwnerAnalytics = async () => {
     return axiosInstance.get("/users/owner/analytics");
