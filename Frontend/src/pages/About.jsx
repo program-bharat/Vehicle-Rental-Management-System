@@ -28,7 +28,7 @@ const About = () => {
                                 <img
                                     src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7"
                                     alt="About"
-                                    className="rounded-3xl h-[450px] w-full object-cover"
+                                    className="rounded-3xl md:h-[350px] lg:h-[500px] w-full object-cover"
                                 />
                             </div>
                             <div>

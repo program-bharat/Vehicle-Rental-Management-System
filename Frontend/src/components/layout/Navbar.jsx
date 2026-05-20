@@ -125,7 +125,7 @@ const Navbar = () => {
                                             <div className="absolute right-0 top-14 w-64 bg-[#091413] border border-[#285A48] rounded-2xl shadow-lg p-5 text-white">
 
                                                 <div className="border-b border-[#285A48] pb-4 mb-4">
-                                                    <h2 className="text-xl font-bold">
+                                                    <h2 className="text:sm font-bold">
                                                         {user?.name}
                                                     </h2>
                                                     <p className="text-[#408A71] capitalize">

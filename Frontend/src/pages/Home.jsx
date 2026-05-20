@@ -66,12 +66,12 @@ const Home = () => {
 
                         </div>
                         {/* RIGHT */}
-                        <div>
+                        <div class="overflow-hidden rounded-3xl">
                             <img
                                 src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
                                 // src="https://images.unsplash.com/photo-1603189617530-6d32306f57c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJtd3xlbnwwfHwwfHx8MA%3D%3D"
                                 alt="Vehicle"
-                                className="rounded-3xl sm:h-[250px] md:h-[370px] lg:h-[450px] w-full object-cover"
+                                className="rounded-3xl sm:h-[250px] md:h-[370px] lg:h-[450px] w-full object-cover transition-transform duration-300 hover:scale-110"
                             />
                         </div>
                     </div>
@@ -95,21 +95,11 @@ const Home = () => {
                         </Link>
                     </div>
                     {/* VEHICLE CARDS GRID HERE */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        {/* {
-                            vehicles
-                                ?.slice(1, 5)
-                                .map((vehicle) => (
-                                    <VehicleCard
-                                        key={vehicle._id}
-                                        vehicle={vehicle}
-                                    />
-                                ))
-                        } */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {
                             [...vehicles]
                                 .sort(() => Math.random() - 0.5)
-                                .slice(0, 4)
+                                .slice(0, 6)
                                 .map((vehicle) => (
                                     <VehicleCard
                                         key={vehicle._id}

@@ -252,7 +252,7 @@ const Profile = () => {
                                     Joined Date
                                 </p>
 
-                                <h3 className="text-lg sm:text-xl font-semibold text-[#091413]">
+                                <h3 className="text-lg sm:text:sm font-semibold text-[#091413]">
                                     {new Date(user?.createdAt).toDateString()}
                                 </h3>
                             </div>

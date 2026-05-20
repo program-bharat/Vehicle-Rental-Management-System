@@ -98,19 +98,21 @@ const ConfirmBooking = () => {
                 </h1>
 
                 {/* CARD */}
-                <div className="border rounded-3xl overflow-hidden shadow-lg">
+                <div className="border rounded-3xl overflow-hidden shadow-lg grid grid-cols-1 md:grid-cols-2">
                     {/* IMAGE */}
-                    <img
-                        src={
-                            vehicle.image ||
-                            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"
-                        }
-                        alt={vehicle.name}
-                        className="w-full h-80 object-cover"
-                    />
+                    <div className="lg:h-[400px]">
+                        <img
+                            src={
+                                vehicle.image ||
+                                "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"
+                            }
+                            alt={vehicle.name}
+                            className="w-full min-h-[250px] lg:min-h-[450px] object-cover rounded-3xl"
+                        />
+                    </div>
 
                     {/* DETAILS */}
-                    <div className="p-8">
+                    <div className="p-6 sm:p-8 flex flex-col justify-between">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-4xl font-bold">
                                 {vehicle.name}
@@ -121,13 +123,13 @@ const ConfirmBooking = () => {
                         </div>
 
                         {/* BOOKING DETAILS */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                        <div className="grid grid-cols-2 gap-5 mb-8">
                             <div className="border rounded-2xl p-5">
                                 <p className="text-gray-500 mb-2">
                                     Start Date
                                 </p>
 
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="sm:text-sm lg:text:sm font-semibold">
                                     {bookingData.startDate}
                                 </h3>
                             </div>
@@ -136,7 +138,7 @@ const ConfirmBooking = () => {
                                     End Date
                                 </p>
 
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="sm:text-sm lg:text:sm font-semibold">
                                     {bookingData.endDate}
                                 </h3>
                             </div>
@@ -145,7 +147,7 @@ const ConfirmBooking = () => {
                                     Total Days
                                 </p>
 
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="sm:text-sm lg:text:sm font-semibold">
                                     {totalDays} Days
                                 </h3>
                             </div>
@@ -154,7 +156,7 @@ const ConfirmBooking = () => {
                                     Total Price
                                 </p>
 
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="sm:text-sm lg:text:sm font-semibold">
                                     ₹{totalPrice}
                                 </h3>
                             </div>

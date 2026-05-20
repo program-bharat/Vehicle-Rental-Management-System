@@ -24,7 +24,7 @@ const Footer = () => {
                         </div>
                         {/* QUICK LINKS */}
                         <div>
-                            <h3 className="text-xl font-semibold mb-5">
+                            <h3 className="text:sm font-semibold mb-5">
                                 Quick Links
                             </h3>
                             <div className="flex flex-col gap-3 text-gray-300 text-sm">
@@ -35,7 +35,7 @@ const Footer = () => {
                                     Home
                                 </Link>
                                 <Link
-                                    to="/vehicles"
+                                    to="/explore"
                                     className="hover:text-[#B0E4CC] transition"
                                 >
                                     Explore
@@ -57,7 +57,7 @@ const Footer = () => {
                         </div>
                         {/* SERVICES */}
                         <div>
-                            <h3 className="text-xl font-semibold mb-5">
+                            <h3 className="text:sm font-semibold mb-5">
                                 Services
                             </h3>
                             <div className="flex flex-col gap-3 text-gray-300 text-sm">
@@ -69,7 +69,7 @@ const Footer = () => {
                         </div>
                         {/* SOCIALS */}
                         <div>
-                            <h3 className="text-xl font-semibold mb-5">
+                            <h3 className="text:sm font-semibold mb-5">
                                 Connect
                             </h3>
                             <div className="flex items-center gap-4 mb-5">

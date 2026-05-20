@@ -95,7 +95,7 @@ const VehicleDetails = () => {
     return (
         <>
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {/* IMAGE */}
                     <div>
                         <img
@@ -104,7 +104,7 @@ const VehicleDetails = () => {
                                 "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"
                             }
                             alt={vehicle.name}
-                            className="w-full h-[500px] object-cover rounded-3xl shadow-lg"
+                            className="w-full md:h-[350px] lg:h-[500px] object-cover rounded-3xl shadow-lg"
                         />
                     </div>
 
@@ -124,12 +124,12 @@ const VehicleDetails = () => {
                         </p>
 
                         {/* SPECS */}
-                        <div className="grid grid-cols-2 gap-4 mb-8">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                             <div className="border rounded-2xl p-4">
                                 <p className="text-gray-500 mb-1">
                                     Brand
                                 </p>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text:sm font-semibold">
                                     {vehicle.brand}
                                 </h3>
                             </div>
@@ -137,7 +137,7 @@ const VehicleDetails = () => {
                                 <p className="text-gray-500 mb-1">
                                     Type
                                 </p>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text:sm font-semibold">
                                     {vehicle.type}
                                 </h3>
                             </div>
@@ -145,7 +145,7 @@ const VehicleDetails = () => {
                                 <p className="text-gray-500 mb-1">
                                     Fuel Type
                                 </p>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text:sm font-semibold">
                                     {vehicle.fuelType}
                                 </h3>
                             </div>
@@ -153,7 +153,7 @@ const VehicleDetails = () => {
                                 <p className="text-gray-500 mb-1">
                                     Availability
                                 </p>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text:sm font-semibold">
                                     {
                                         vehicle.availability
                                             ? "Available"
@@ -194,12 +194,6 @@ const VehicleDetails = () => {
                                 <h2 className="text-2xl font-bold">
                                     Select Booking Dates
                                 </h2>
-                                <button
-                                    onClick={handleFocusDate}
-                                    className="bg-gray-100 px-4 py-2 rounded-xl cursor-pointer"
-                                >
-                                    Focus Date Input
-                                </button>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                                 <input
