@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { NumberTicker } from "@/components/ui/number-ticker";
 import { requestOwnerRole } from "../api/userAPI";
 import { getPublicVehicles } from "../api/vehicleAPI";
 import { setVehicles } from "../rtk/slices/vehicleSlice";
@@ -76,7 +77,7 @@ const Home = () => {
 
                         </div>
                         {/* RIGHT */}
-                        <div class="overflow-hidden rounded-3xl">
+                        <div className="overflow-hidden rounded-3xl">
                             <img
                                 src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
                                 // src="https://images.unsplash.com/photo-1603189617530-6d32306f57c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJtd3xlbnwwfHwwfHx8MA%3D%3D"
@@ -225,33 +226,53 @@ const Home = () => {
                 {/* STATS SECTION */}
                 <section className="bg-[#091413] rounded-3xl text-white px-8 py-14 mb-20">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                        {/* VEHICLES */}
                         <div>
-                            <h2 className="text-5xl font-bold mb-3">
-                                500+
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                <NumberTicker
+                                    value={1000}
+                                    className="whitespace-pre-wrap text-white"
+                                />
+                                +
                             </h2>
                             <p className="text-gray-300">
                                 Vehicles
                             </p>
                         </div>
+                        {/* CUSTOMERS */}
                         <div>
-                            <h2 className="text-5xl font-bold mb-3">
-                                10K+
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                <NumberTicker
+                                    value={15000}
+                                    className="whitespace-pre-wrap text-white"
+                                />
+                                +
                             </h2>
                             <p className="text-gray-300">
                                 Happy Customers
                             </p>
                         </div>
+                        {/* CITIES */}
                         <div>
-                            <h2 className="text-5xl font-bold mb-3">
-                                25+
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                <NumberTicker
+                                    value={27}
+                                    className="whitespace-pre-wrap text-white"
+                                />
+                                +
                             </h2>
                             <p className="text-gray-300">
                                 Cities
                             </p>
                         </div>
+                        {/* BOOKINGS */}
                         <div>
-                            <h2 className="text-5xl font-bold mb-3">
-                                15K+
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                <NumberTicker
+                                    value={10000}
+                                    className="whitespace-pre-wrap text-white"
+                                />
+                                +
                             </h2>
                             <p className="text-gray-300">
                                 Successful Bookings

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NumberTicker } from "@/components/ui/number-ticker";
 
 const About = () => {
     return (
@@ -24,11 +25,11 @@ const About = () => {
                     {/* COMPANY STORY */}
                     <section>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-14 items-center">
-                            <div>
+                            <div className="overflow-hidden rounded-3xl">
                                 <img
                                     src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7"
                                     alt="About"
-                                    className="rounded-3xl md:h-[350px] lg:h-[500px] w-full object-cover"
+                                    className="rounded-3xl md:h-[350px] lg:h-[500px] w-full object-cover transition-transform duration-300 hover:scale-110"
                                 />
                             </div>
                             <div>
@@ -133,39 +134,59 @@ const About = () => {
                             </div>
                         </div>
                     </section>
-                    {/* STATS */}
-                    <section className="bg-[#091413] rounded-3xl text-white px-8 py-14">
+                    {/* STATS SECTION */}
+                    <section className="bg-[#091413] rounded-3xl text-white px-8 py-14 mb-20">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                            {/* VEHICLES */}
                             <div>
-                                <h2 className="text-5xl font-bold mb-3">
-                                    500+
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                    <NumberTicker
+                                        value={1000}
+                                        className="whitespace-pre-wrap text-white"
+                                    />
+                                    +
                                 </h2>
                                 <p className="text-gray-300">
                                     Vehicles
                                 </p>
                             </div>
+                            {/* CUSTOMERS */}
                             <div>
-                                <h2 className="text-5xl font-bold mb-3">
-                                    10K+
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                    <NumberTicker
+                                        value={15000}
+                                        className="whitespace-pre-wrap text-white"
+                                    />
+                                    +
                                 </h2>
                                 <p className="text-gray-300">
-                                    Users
+                                    Happy Customers
                                 </p>
                             </div>
+                            {/* CITIES */}
                             <div>
-                                <h2 className="text-5xl font-bold mb-3">
-                                    25+
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                    <NumberTicker
+                                        value={27}
+                                        className="whitespace-pre-wrap text-white"
+                                    />
+                                    +
                                 </h2>
                                 <p className="text-gray-300">
                                     Cities
                                 </p>
                             </div>
+                            {/* BOOKINGS */}
                             <div>
-                                <h2 className="text-5xl font-bold mb-3">
-                                    15K+
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 flex items-center justify-center">
+                                    <NumberTicker
+                                        value={10000}
+                                        className="whitespace-pre-wrap text-white"
+                                    />
+                                    +
                                 </h2>
                                 <p className="text-gray-300">
-                                    Bookings
+                                    Successful Bookings
                                 </p>
                             </div>
                         </div>
