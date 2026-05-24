@@ -11,6 +11,7 @@ const {
     approveVehicle,
     deleteUser,
     getOwnerAnalytics,
+    getAdminDashboardStats,
     getMyProfile,
     updateProfile
 } = require('../controllers/userController');
@@ -24,6 +25,9 @@ router.get("/", protect, authorize('admin'), getAllUsers);
 
 // Owner Analytics
 router.get("/owner/analytics", protect, authorize('owner'), getOwnerAnalytics);
+
+// Admin Analytics
+router.get("/dashboard", protect, authorize("admin"), getAdminDashboardStats);
 
 // USER SEND OWNER REQUEST
 router.put("/request-owner", protect, requestOwnerRole);

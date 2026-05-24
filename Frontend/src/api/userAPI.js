@@ -30,3 +30,7 @@ export const markOwnerRequestSeen = async () => {
 export const getOwnerAnalytics = async () => {
     return axiosInstance.get("/users/owner/analytics");
 }
+// Admin Analytics
+export const getAdminDashboardStats = () => {
+    return axiosInstance.get("/users/dashboard");
+};

@@ -4,6 +4,9 @@ import { useLocation } from "react-router-dom";
 const ScrollToTop = () => {
     const { pathname } = useLocation();
     useEffect(() => {
+        if (pathname.startsWith("/admin/dashboard") || pathname.startsWith("/owner/dashboard")) {
+            return;
+        }
         window.scrollTo({
             top: 0,
             behavior: "smooth",

@@ -47,8 +47,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
 
           {/* Protected Routes */}
-          <Route
-            path="/confirm-booking"
+          <Route path="/confirm-booking"
             element={
               <PrivateRoute>
                 <ConfirmBooking />
@@ -56,24 +55,21 @@ const App = () => {
             }
           />
 
-          <Route
-            path="/my-bookings"
+          <Route path="/my-bookings"
             element={
               <PrivateRoute>
                 <MyBookings />
               </PrivateRoute>
             }
           />
-          <Route
-            path="/profile"
+          <Route path="/profile"
             element={
               <PrivateRoute>
                 <Profile />
               </PrivateRoute>
             }
           />
-          <Route
-            path="/owner/dashboard"
+          <Route path="/owner/dashboard"
             element={
               <PrivateRoute>
                 <RoleBasedRoute role="owner">
@@ -82,44 +78,22 @@ const App = () => {
               </PrivateRoute>
             }
           >
-            <Route
-              path="my-vehicles"
-              element={<MyVehicles />}
-            />
-            <Route
-              path="edit-vehicle/:id"
-              element={<EditVehicle />}
-            />
-            <Route
-              path="add-vehicle"
-              element={<AddVehicle />}
-            />
-            <Route
-              path="my-bookings"
-              element={<MyBookings />}
-            />
-            <Route
-              path="booking-requests"
-              element={<BookingRequests />}
-            />
+            <Route path="my-vehicles" element={<MyVehicles />} />
+            <Route path="edit-vehicle/:id" element={<EditVehicle />} />
+            <Route path="add-vehicle" element={<AddVehicle />} />
+            <Route path="my-bookings" element={<MyBookings />} />
+            <Route path="booking-requests" element={<BookingRequests />} />
           </Route>
 
-          <Route
-            path="/admin/dashboard"
+          <Route path="/admin/dashboard"
             element={
               <RoleBasedRoute role="admin">
                 <AdminDashboard />
               </RoleBasedRoute>
             }
           >
-            <Route
-              path="users"
-              element={<ManageUsers />}
-            />
-            <Route
-              path="vehicles"
-              element={<ManageVehicles />}
-            />
+            <Route path="users" element={<ManageUsers />} />
+            <Route path="vehicles" element={<ManageVehicles />} />
           </Route>
         </Route>
       </Routes>

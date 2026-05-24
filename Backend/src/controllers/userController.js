@@ -275,3 +275,58 @@ exports.updateProfile = async (req, res, next) => {
         next(error);
     }
 };
+exports.getAdminDashboardStats = async (req, res, next) => {
+    try {
+        const totalUsers = await User.countDocuments();
+        const totalVehicles = await Vehicle.countDocuments();
+        const pendingVehicles = await Vehicle.countDocuments({
+            isApproved: false,
+        });
+        const totalBookings = await Booking.countDocuments();
+        const revenueResult = await Booking.aggregate([
+            {
+                $match: {
+                    status: "approved",
+                },
+            },
+            {
+                $group: {
+                    _id: null,
+                    totalRevenue: {
+                        $sum: "$totalPrice",
+                    },
+                },
+            },
+        ]);
+        const totalRevenue =
+            revenueResult[0]?.totalRevenue || 0;
+        const recentUsers = await User.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .select("name email role createdAt isVerified");
+        const recentVehicles = await Vehicle.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .populate("ownerId", "name");
+        const recentBookings = await Booking.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .populate("userId", "name")
+            .populate("vehicleId", "name");
+        res.status(200).json({
+            success: true,
+            data: {
+                totalUsers,
+                totalVehicles,
+                pendingVehicles,
+                totalBookings,
+                totalRevenue,
+                recentUsers,
+                recentVehicles,
+                recentBookings,
+            },
+        });
+    } catch (error) {
+        next(error);
+    }
+};
