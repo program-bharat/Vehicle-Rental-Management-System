@@ -13,12 +13,18 @@ const {
     getOwnerAnalytics,
     getAdminDashboardStats,
     getMyProfile,
-    updateProfile
+    updateProfile,
+    changePassword,
 } = require('../controllers/userController');
 
 // USER PROFILE
 router.get("/profile/me", protect, getMyProfile);
+
+// Update Profile
 router.put("/profile/update", protect, updateProfile);
+
+// Change Password
+router.put("/profile/change-password", protect, changePassword);
 
 // Admin can see all the users
 router.get("/", protect, authorize('admin'), getAllUsers);

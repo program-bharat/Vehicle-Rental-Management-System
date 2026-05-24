@@ -10,6 +10,7 @@ import VehicleCard from "../components/vehicle/VehicleCard";
 const Home = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { user } = useSelector((state) => state.auth);
     const { vehicles } = useSelector((state) => state.vehicle);
     const [quickSearch, setQuickSearch] = useState({
         type: "",
@@ -289,19 +290,33 @@ const Home = () => {
                     <p className="text-gray-500 text-lg mb-8">
                         Explore premium vehicles and book instantly.
                     </p>
-                    <div className="flex items-center justify-center flex-wrap gap-5">
+                    <div className="flex flex-wrap justify-center gap-4">
                         <Link
                             to="/explore"
-                            className="bg-[#091413] hover:bg-[#285A48] text-white px-7 py-3 rounded-xl transition"
+                            className="bg-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition"
                         >
                             Explore Vehicles
                         </Link>
-                        <Link
-                            to="/register"
-                            className="border border-[#091413] text-[#091413] hover:bg-[#091413] hover:text-white px-7 py-3 rounded-xl transition"
-                        >
-                            Register Now
-                        </Link>
+                        {
+                            user && user.role === "user" && (
+                                <button
+                                    onClick={handleBecomeOwner}
+                                    className="border border-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition cursor-pointer"
+                                >
+                                    Become Owner
+                                </button>
+                            )
+                        }
+                        {
+                            !user && (
+                                <Link
+                                    to="/login"
+                                    className="bg-[#408A71] hover:bg-[#285A48] px-6 py-3 rounded-xl font-semibold transition"
+                                >
+                                    Login
+                                </Link>
+                            )
+                        }
                     </div>
                 </section>
             </div>

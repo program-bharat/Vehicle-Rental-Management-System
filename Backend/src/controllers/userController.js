@@ -1,6 +1,7 @@
 const User = require('../models/Users');
 const Vehicle = require('../models/Vehicles')
 const Booking = require('../models/Bookings')
+const bcrypt = require("bcrypt");
 
 exports.getAllUsers = async (req, res, next) => {
     try {
@@ -270,6 +271,60 @@ exports.updateProfile = async (req, res, next) => {
                 isVerified: user.isVerified,
                 createdAt: user.createdAt
             }
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+// CHANGE PASSWORD
+exports.changePassword = async (req, res, next) => {
+    try {
+        const { currentPassword, newPassword, confirmPassword } = req.body;
+        // Validation
+        if (!currentPassword || !newPassword || !confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "Passwords do not match"
+            });
+        }
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must be at least 6 characters"
+            });
+        }
+        // Find user
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        // Check current password
+        const isMatch = await bcrypt.compare(
+            currentPassword,
+            user.password
+        );
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: "Current password is incorrect"
+            });
+        }
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: "Password changed successfully"
         });
     } catch (error) {
         next(error);

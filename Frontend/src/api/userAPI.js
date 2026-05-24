@@ -11,6 +11,9 @@ export const getMyProfile = () => {
 export const updateProfile = (data) => {
     return axiosInstance.put("/users/profile/update", data);
 };
+export const changePassword = (data) => {
+    return axiosInstance.put("/users/profile/change-password", data);
+};
 export const deleteUser = (id) => {
     return axiosInstance.delete(`/users/${id}`);
 }

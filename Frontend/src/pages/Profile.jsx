@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { getBookings } from "../api/bookingAPI";
 import { logout, setCredentials } from "../rtk/slices/authSlice";
-import { updateProfile, getMyProfile, markOwnerRequestSeen } from "../api/userAPI";
+import { updateProfile, getMyProfile, markOwnerRequestSeen, changePassword } from "../api/userAPI";
 import {
     FaUserCircle, FaEnvelope, FaPhoneAlt, FaCalendarAlt, FaCheckCircle, FaCar, FaClipboardList, FaKey,
     FaSignOutAlt, FaChartBar, FaSave,
@@ -62,6 +62,26 @@ const Profile = () => {
             toast.error(error);
         } finally {
             setLoading(false);
+        }
+    };
+    const handleChangePassword = async () => {
+        try {
+            if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+                return toast.error("All fields are required");
+            }
+            if (passwordData.newPassword !== passwordData.confirmPassword) {
+                return toast.error("Passwords do not match");
+            }
+            const res = await changePassword(passwordData);
+            toast.success(res.data.message);
+            setPasswordData({
+                currentPassword: "",
+                newPassword: "",
+                confirmPassword: ""
+            });
+            setShowPasswordSection(false);
+        } catch (error) {
+            toast.error(error || "Password update failed");
         }
     };
     useEffect(() => {
@@ -438,6 +458,7 @@ const Profile = () => {
                                 />
 
                                 <button
+                                    onClick={handleChangePassword}
                                     className="bg-[#091413] hover:bg-[#285A48] text-white py-3 rounded-2xl transition cursor-pointer"
                                 >
                                     Update Password
