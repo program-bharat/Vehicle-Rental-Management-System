@@ -195,6 +195,10 @@ exports.getOwnerAnalytics = async (req, res, next) => {
         const totalBookings = await Booking.countDocuments({
             vehicleId: { $in: vehicleIds }
         });
+        const pendingBookings = await Booking.countDocuments({
+            vehicleId: { $in: vehicleIds },
+            status: "pending"
+        });
         // Total Revenue (only approved bookings)
         const revenueResult = await Booking.aggregate([
             {
@@ -217,6 +221,7 @@ exports.getOwnerAnalytics = async (req, res, next) => {
             data: {
                 totalVehicles: vehicles.length,
                 totalBookings,
+                pendingBookings,
                 totalRevenue
             }
         });

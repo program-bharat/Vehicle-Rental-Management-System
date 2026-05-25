@@ -68,7 +68,7 @@ const About = () => {
                             </p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-10">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-10 shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-3xl font-bold text-[#091413] mb-5">
                                     Our Mission
                                 </h3>
@@ -78,7 +78,7 @@ const About = () => {
                                     experiences for customers everywhere.
                                 </p>
                             </div>
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-10">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-10 shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-3xl font-bold text-[#091413] mb-5">
                                     Our Vision
                                 </h3>
@@ -100,7 +100,7 @@ const About = () => {
                             </p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-4">
                                     Trusted Rentals
                                 </h3>
@@ -108,7 +108,7 @@ const About = () => {
                                     Reliable vehicles from verified owners.
                                 </p>
                             </div>
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-4">
                                     Verified Owners
                                 </h3>
@@ -116,7 +116,7 @@ const About = () => {
                                     Every owner and vehicle is verified.
                                 </p>
                             </div>
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-4">
                                     Secure Booking
                                 </h3>
@@ -124,7 +124,7 @@ const About = () => {
                                     Safe and transparent booking process.
                                 </p>
                             </div>
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-4">
                                     Affordable Pricing
                                 </h3>
@@ -202,7 +202,7 @@ const About = () => {
                             </p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-2">
                                     Bharat
                                 </h3>
@@ -213,7 +213,7 @@ const About = () => {
                                     Leading product vision and platform growth.
                                 </p>
                             </div>
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-2">
                                     Operations Team
                                 </h3>
@@ -224,7 +224,7 @@ const About = () => {
                                     Managing vehicle onboarding and rentals.
                                 </p>
                             </div>
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center">
+                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center shadow-sm hover:-translate-y-3 transition-all duration-300">
                                 <h3 className="text-2xl font-bold mb-2">
                                     Support Team
                                 </h3>

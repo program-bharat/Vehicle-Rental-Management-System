@@ -3,10 +3,11 @@ import { getOwnerVehicles, deleteVehicle, toggleAvailability } from "../../api/v
 import { useEffect, useState } from "react";
 
 const MyVehicles = () => {
-
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [selectedVehicleId, setSelectedVehicleId] = useState(null);
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -23,6 +24,10 @@ const MyVehicles = () => {
         };
         fetchVehicles();
     }, []);
+    const openDeletePopup = (id) => {
+        setSelectedVehicleId(id);
+        setShowDeleteConfirm(true);
+    };
     // DELETE VEHICLE
     const handleDelete = async (id) => {
         try {
@@ -35,7 +40,6 @@ const MyVehicles = () => {
             console.log(error);
         }
     };
-
     // TOGGLE AVAILABILITY
     const handleToggleAvailability = async (id) => {
         try {
@@ -55,7 +59,6 @@ const MyVehicles = () => {
 
         }
     };
-
     if (loading) {
         return (
             <>
@@ -65,7 +68,6 @@ const MyVehicles = () => {
             </>
         );
     }
-
     if (error) {
         return (
             <>
@@ -75,7 +77,6 @@ const MyVehicles = () => {
             </>
         );
     }
-
     return (
         <>
             <div>
@@ -94,7 +95,7 @@ const MyVehicles = () => {
                                     <OwnerVehicleCard
                                         key={vehicle._id}
                                         vehicle={vehicle}
-                                        handleDelete={handleDelete}
+                                        handleDelete={openDeletePopup}
                                         handleToggleAvailability={handleToggleAvailability}
                                     />
 
@@ -104,7 +105,37 @@ const MyVehicles = () => {
                         </div>
                     )
                 }
-
+                {/* Pop-up Delete Confirmation */}
+                {showDeleteConfirm && (
+                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+                        <div className="bg-white border border-[#dcefe7] rounded-[30px] w-full max-w-md shadow-xl p-7">
+                            <h2 className="text-3xl font-bold text-[#091413] mb-3">
+                                Confirm Delete
+                            </h2>
+                            <p className="text-gray-500 mb-8">
+                                Are you sure you want to delete this vehicle?
+                            </p>
+                            <div className="flex justify-end gap-3">
+                                <button
+                                    onClick={() => setShowDeleteConfirm(false)}
+                                    className="px-5 py-3 border border-[#dcefe7] rounded-2xl hover:bg-[#f6fbf8] transition-all duration-300 cursor-pointer"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={async () => {
+                                        await handleDelete(selectedVehicleId);
+                                        setShowDeleteConfirm(false);
+                                        setSelectedVehicleId(null);
+                                    }}
+                                    className="bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
+                                >
+                                    Yes, Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );

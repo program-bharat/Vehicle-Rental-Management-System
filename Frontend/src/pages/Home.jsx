@@ -132,7 +132,7 @@ const Home = () => {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-3">
                                 Easy Booking
                             </h3>
@@ -140,7 +140,7 @@ const Home = () => {
                                 Simple and fast vehicle booking experience.
                             </p>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-3">
                                 Verified Vehicles
                             </h3>
@@ -148,7 +148,7 @@ const Home = () => {
                                 Trusted and verified owners and vehicles.
                             </p>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-3">
                                 Affordable Pricing
                             </h3>
@@ -156,7 +156,7 @@ const Home = () => {
                                 Best pricing for daily and weekly rentals.
                             </p>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3]">
+                        <div className="bg-white p-8 rounded-3xl border border-[#D6EFE3] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-3">
                                 24/7 Support
                             </h3>
@@ -173,19 +173,19 @@ const Home = () => {
                         Vehicle Categories
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold shadow-sm hover:-translate-y-3 transition-all duration-300">
                             Cars
                         </div>
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold shadow-sm hover:-translate-y-3 transition-all duration-300">
                             Bikes
                         </div>
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold shadow-sm hover:-translate-y-3 transition-all duration-300">
                             SUVs
                         </div>
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold shadow-sm hover:-translate-y-3 transition-all duration-300">
                             Sports Bikes
                         </div>
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 text-center font-semibold shadow-sm hover:-translate-y-3 transition-all duration-300">
                             Luxury Vehicles
                         </div>
                     </div>
@@ -197,7 +197,7 @@ const Home = () => {
                         What Customers Say
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px]">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <p className="text-gray-600 leading-7 italic">
                                 "Amazing rental experience and smooth booking process."
                             </p>
@@ -205,7 +205,7 @@ const Home = () => {
                                 — Rahul
                             </h3>
                         </div>
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px]">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <p className="text-gray-600 leading-7 italic">
                                 "Clean vehicles and affordable pricing."
                             </p>
@@ -213,7 +213,7 @@ const Home = () => {
                                 — Shubham
                             </h3>
                         </div>
-                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px]">
+                        <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex flex-col h-[180px] shadow-sm hover:-translate-y-3 transition-all duration-300">
                             <p className="text-gray-600 leading-7 italic">
                                 "One of the best rental platforms I have used."
                             </p>
