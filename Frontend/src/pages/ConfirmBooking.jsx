@@ -14,8 +14,6 @@ const ConfirmBooking = () => {
 
     const [loading, setLoading] = useState(false);
     const [vehicle, setVehicle] = useState(null);
-    // const [error, setError] = useState("");
-    // const [success, setSuccess] = useState("");
 
     useEffect(() => {
         const fetchVehicle = async () => {
@@ -96,14 +94,14 @@ const ConfirmBooking = () => {
                 {/* CARD */}
                 <div className="border rounded-3xl overflow-hidden shadow-lg grid grid-cols-1 md:grid-cols-2">
                     {/* IMAGE */}
-                    <div className="lg:h-[400px]">
+                    <div className="lg:h-full">
                         <img
                             src={
                                 vehicle.image ||
                                 "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"
                             }
                             alt={vehicle.name}
-                            className="w-full min-h-[250px] lg:min-h-[450px] object-cover rounded-3xl"
+                            className="w-full h-full min-h-[250px] object-cover rounded-3xl"
                         />
                     </div>
 
@@ -174,22 +172,6 @@ const ConfirmBooking = () => {
                                     : "Confirm Booking"
                             }
                         </button>
-                        {/* SUCCESS */}
-                        {/* {
-                            success && (
-                                <div className="bg-green-100 text-green-700 p-4 rounded-xl mt-5">
-                                    {success}
-                                </div>
-                            )
-                        } */}
-                        {/* ERROR */}
-                        {/* {
-                            error && (
-                                <div className="bg-red-100 text-red-600 p-4 rounded-xl mt-5">
-                                    {error}
-                                </div>
-                            )
-                        } */}
                     </div>
                 </div>
             </div>
