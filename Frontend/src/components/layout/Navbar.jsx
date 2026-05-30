@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 
 import { logout } from "../../rtk/slices/authSlice";
-
+import { toast } from "react-toastify";
+import { getMyProfile, markOwnerRequestSeen } from "../../api/userAPI";
 const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -42,6 +43,26 @@ const Navbar = () => {
         setMenuOpen(false);
         setProfileOpen(false);
     }, [location.pathname]);
+    useEffect(() => {
+        if (!token) return;
+        const interval = setInterval(async () => {
+            try {
+                const res = await getMyProfile();
+                const user = res.data.data;
+                if (user.ownerRequestStatus === "approved" && user.ownerRequestSeen === false) {
+                    await markOwnerRequestSeen();
+                    toast.success("Please login again.");
+                    toast.success("Your owner request has been approved.");
+                    dispatch(logout());
+                    navigate("/login");
+                    clearInterval(interval);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }, 10000); // check every 10 sec
+        return () => clearInterval(interval);
+    }, [token, dispatch, navigate]);
     return (
         <>
             <nav className="border-b border-[#B0E4CC] bg-[#091413] sticky top-0 z-50 shadow-sm">
