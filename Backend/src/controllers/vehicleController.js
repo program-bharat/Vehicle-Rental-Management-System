@@ -1,5 +1,6 @@
 const Vehicle = require('../models/Vehicles');
 const User = require("../models/Users")
+const cloudinary = require("../config/cloudinary");
 
 exports.getOwnerVehicles = async (req, res, next) => {
     try {
@@ -58,7 +59,8 @@ exports.createVehicle = async (req, res, next) => {
         const vehicle = await Vehicle.create({
             ownerId: req.user.id,
             ...req.body,
-            image: req.file.path
+            image: req.file.path,
+            imagePublicId: req.file.filename,
         });
         res.status(201).json({
             success: true,
@@ -122,6 +124,11 @@ exports.deleteVehicle = async (req, res, next) => {
                 success: false,
                 message: "Not Authorized"
             });
+        }
+        if (vehicle.imagePublicId) {
+            await cloudinary.uploader.destroy(
+                vehicle.imagePublicId
+            );
         }
         await Vehicle.findByIdAndDelete(vehicleID);
         res.status(200).json({
