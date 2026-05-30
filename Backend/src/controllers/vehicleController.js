@@ -92,7 +92,15 @@ exports.updateVehicle = async (req, res, next) => {
             ...req.body,
         };
         if (req.file) {
+            // Delete old image from Cloudinary
+            if (vehicle.imagePublicId) {
+                await cloudinary.uploader.destroy(
+                    vehicle.imagePublicId
+                );
+            }
+            // Save new image details
             updateData.image = req.file.path;
+            updateData.imagePublicId = req.file.filename;
         }
         const updatedVehicle = await Vehicle.findByIdAndUpdate(
             vehicleID,
