@@ -17,6 +17,7 @@ const EditVehicle = () => {
         transmission: "",
         pricePerDay: "",
         image: null,
+        imageUrl: "",
     });
 
     const [loading, setLoading] = useState(false);
@@ -39,6 +40,7 @@ const EditVehicle = () => {
                     transmission: vehicle.transmission || "",
                     pricePerDay: vehicle.pricePerDay || "",
                     image: null,
+                    imageUrl: vehicle.image || "",
                 });
             } catch (error) {
                 console.log(error);
@@ -125,6 +127,7 @@ const EditVehicle = () => {
                     loading={loading}
                     error={error}
                     buttonText="Update Vehicle"
+                    isEdit={true}
                 />
             </div>
         </>

@@ -5,6 +5,7 @@ const VehicleForm = ({
     handleSubmit,
     loading,
     buttonText,
+    isEdit,
 }) => {
 
     return (
@@ -175,13 +176,21 @@ const VehicleForm = ({
                     <label className="block mb-2 font-semibold">
                         Vehicle Image
                     </label>
-
+                    {
+                        isEdit && formData.imageUrl && (
+                            <img
+                                src={formData.imageUrl}
+                                alt="Vehicle"
+                                className="md:h-90 w-full object-cover rounded-xl mb-3 mx-auto"
+                            />
+                        )
+                    }
                     <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
                         className="w-full border p-3 rounded-xl outline-none"
-                        required
+                        required={!isEdit}
                     />
                 </div>
 
