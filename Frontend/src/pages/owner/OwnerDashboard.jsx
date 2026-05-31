@@ -5,7 +5,6 @@ import { getOwnerAnalytics } from "../../api/userAPI";
 
 const OwnerDashboard = () => {
     const location = useLocation();
-    const isDashboardHome = location.pathname === "/owner/dashboard";
     const owner = JSON.parse(localStorage.getItem("user"));
     const [analytics, setAnalytics] = useState({
         totalVehicles: 0,
@@ -98,175 +97,168 @@ const OwnerDashboard = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* ANALYTICS */}
-                {
-                    isDashboardHome && (
-                        <>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
-                                {/* TOTAL VEHICLES */}
-                                <div className="bg-white rounded-[28px] p-6 border border-[#dcefe7] shadow-sm hover:-translate-y-1 transition-all duration-300">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="w-14 h-14 rounded-2xl bg-[#B0E4CC] flex items-center justify-center">
-                                            <CarFront className="text-[#091413]" />
-                                        </div>
-                                        <span className="text-sm text-gray-500">
-                                            Vehicles
-                                        </span>
-                                    </div>
-                                    <h2 className="text-4xl font-bold text-[#091413] mb-2">
-                                        {analytics.totalVehicles}
-                                    </h2>
-                                    <p className="text-sm text-[#408A71]">
-                                        Active listed vehicles
-                                    </p>
+                <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+                        {/* TOTAL VEHICLES */}
+                        <div className="bg-white rounded-[28px] p-6 border border-[#dcefe7] shadow-sm hover:-translate-y-1 transition-all duration-300">
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="w-14 h-14 rounded-2xl bg-[#B0E4CC] flex items-center justify-center">
+                                    <CarFront className="text-[#091413]" />
                                 </div>
+                                <span className="text-sm text-gray-500">
+                                    Vehicles
+                                </span>
+                            </div>
+                            <h2 className="text-4xl font-bold text-[#091413] mb-2">
+                                {analytics.totalVehicles}
+                            </h2>
+                            <p className="text-sm text-[#408A71]">
+                                Active listed vehicles
+                            </p>
+                        </div>
 
-                                {/* BOOKINGS */}
-                                <div className="bg-white rounded-[28px] p-6 border border-[#dcefe7] shadow-sm hover:-translate-y-1 transition-all duration-300">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="w-14 h-14 rounded-2xl bg-[#e7f5ef] flex items-center justify-center">
-                                            <CalendarCheck className="text-[#285A48]" />
-                                        </div>
-                                        <span className="text-sm text-gray-500">
-                                            Bookings
-                                        </span>
-                                    </div>
-
-                                    <h2 className="text-4xl font-bold text-[#091413] mb-2">
-                                        {analytics.totalBookings}
-                                    </h2>
-                                    <p className="text-sm text-[#408A71]">
-                                        Total booking requests
-                                    </p>
+                        {/* BOOKINGS */}
+                        <div className="bg-white rounded-[28px] p-6 border border-[#dcefe7] shadow-sm hover:-translate-y-1 transition-all duration-300">
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="w-14 h-14 rounded-2xl bg-[#e7f5ef] flex items-center justify-center">
+                                    <CalendarCheck className="text-[#285A48]" />
                                 </div>
-
-                                {/* REVENUE */}
-                                <div className="bg-[#285A48] rounded-[28px] p-6 border border-[#408A71] shadow-sm hover:-translate-y-1 transition-all duration-300">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="w-14 h-14 rounded-2xl bg-[#408A71] flex items-center justify-center">
-                                            <IndianRupee className="text-white" />
-                                        </div>
-                                        <span className="text-sm text-[#B0E4CC]">
-                                            Revenue
-                                        </span>
-                                    </div>
-                                    <h2 className="text-4xl font-bold text-white mb-2">
-                                        ₹{analytics.totalRevenue}
-                                    </h2>
-                                    <p className="text-sm text-[#B0E4CC]">
-                                        Approved booking earnings
-                                    </p>
-                                </div>
-
-                                {/* PENDING */}
-                                <div className="bg-white rounded-[28px] p-6 border border-[#dcefe7] shadow-sm hover:-translate-y-1 transition-all duration-300">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center">
-                                            <BadgeCheck className="text-yellow-700" />
-                                        </div>
-
-                                        <span className="text-sm text-gray-500">
-                                            Requests
-                                        </span>
-                                    </div>
-                                    <h2 className="text-4xl font-bold text-[#091413] mb-2">
-                                        {analytics.pendingBookings}
-                                    </h2>
-                                    <p className="text-sm text-yellow-600">
-                                        Pending booking approvals
-                                    </p>
-                                </div>
+                                <span className="text-sm text-gray-500">
+                                    Bookings
+                                </span>
                             </div>
 
-                            {/* QUICK ACTIONS */}
-                            <div className="mb-10">
-                                <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-3xl font-bold text-[#091413]">
-                                        Quick Actions
-                                    </h2>
-                                    <div className="hidden md:flex items-center gap-2 text-[#285A48] font-medium">
-                                        Owner Controls
-                                        <ArrowRight size={18} />
-                                    </div>
+                            <h2 className="text-4xl font-bold text-[#091413] mb-2">
+                                {analytics.totalBookings}
+                            </h2>
+                            <p className="text-sm text-[#408A71]">
+                                Total booking requests
+                            </p>
+                        </div>
+
+                        {/* REVENUE */}
+                        <div className="bg-[#285A48] rounded-[28px] p-6 border border-[#408A71] shadow-sm hover:-translate-y-1 transition-all duration-300">
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="w-14 h-14 rounded-2xl bg-[#408A71] flex items-center justify-center">
+                                    <IndianRupee className="text-white" />
                                 </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-
-                                    {/* ADD VEHICLE */}
-                                    <Link
-                                        to="/owner/dashboard/add-vehicle"
-                                        className="group bg-[#091413] rounded-[30px] p-7 text-white hover:-translate-y-1 transition-all duration-300"
-                                    >
-                                        <div className="w-14 h-14 rounded-2xl bg-[#285A48] flex items-center justify-center mb-6">
-                                            <Plus />
-                                        </div>
-                                        <h3 className="text-2xl font-semibold mb-3">
-                                            Add Vehicle
-                                        </h3>
-                                        <p className="text-[#B0E4CC] text-sm leading-relaxed mb-6">
-                                            Add and publish a new rental vehicle.
-                                        </p>
-                                        <div className="flex items-center gap-2 text-sm text-[#B0E4CC]">
-                                            Open Panel
-                                            <ArrowRight size={16} />
-                                        </div>
-                                    </Link>
-
-                                    {/* MANAGE VEHICLES */}
-                                    <Link
-                                        to="/owner/dashboard/my-vehicles"
-                                        className="group bg-[#285A48] rounded-[30px] p-7 text-white hover:-translate-y-1 transition-all duration-300"
-                                    >
-                                        <div className="w-14 h-14 rounded-2xl bg-[#408A71] flex items-center justify-center mb-6">
-                                            <CarFront />
-                                        </div>
-                                        <h3 className="text-2xl font-semibold mb-3">
-                                            My Vehicles
-                                        </h3>
-                                        <p className="text-[#B0E4CC] text-sm leading-relaxed mb-6">
-                                            Manage listed vehicles and availability.
-                                        </p>
-                                        <div className="flex items-center gap-2 text-sm text-[#B0E4CC]">
-                                            Open Panel
-                                            <ArrowRight size={16} />
-                                        </div>
-                                    </Link>
-
-                                    {/* BOOKINGS */}
-                                    <Link
-                                        to="/owner/dashboard/booking-requests"
-                                        className="bg-white rounded-[30px] p-7 border border-[#dcefe7] hover:-translate-y-1 transition-all duration-300"
-                                    >
-                                        <div className="w-14 h-14 rounded-2xl bg-[#e7f5ef] flex items-center justify-center mb-6">
-                                            <CalendarCheck className="text-[#285A48]" />
-                                        </div>
-                                        <h3 className="text-2xl font-semibold mb-3 text-[#091413]">
-                                            Booking Requests
-                                        </h3>
-                                        <p className="text-gray-500 text-sm leading-relaxed">
-                                            Review and approve booking requests.
-                                        </p>
-                                    </Link>
-
-                                    {/* EARNINGS */}
-                                    <div className="bg-white rounded-[30px] p-7 border border-[#dcefe7] hover:-translate-y-1 transition-all duration-300">
-                                        <div className="w-14 h-14 rounded-2xl bg-[#B0E4CC] flex items-center justify-center mb-6">
-                                            <Wallet className="text-[#091413]" />
-                                        </div>
-                                        <h3 className="text-2xl font-semibold mb-3 text-[#091413]">
-                                            Earnings
-                                        </h3>
-                                        <p className="text-gray-500 text-sm leading-relaxed">
-                                            Track total earnings and booking revenue.
-                                        </p>
-                                    </div>
-                                </div>
+                                <span className="text-sm text-[#B0E4CC]">
+                                    Revenue
+                                </span>
                             </div>
-                        </>
-                    )
-                }
-                {/* OUTLET */}
+                            <h2 className="text-4xl font-bold text-white mb-2">
+                                ₹{analytics.totalRevenue}
+                            </h2>
+                            <p className="text-sm text-[#B0E4CC]">
+                                Approved booking earnings
+                            </p>
+                        </div>
+
+                        {/* PENDING */}
+                        <div className="bg-white rounded-[28px] p-6 border border-[#dcefe7] shadow-sm hover:-translate-y-1 transition-all duration-300">
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center">
+                                    <BadgeCheck className="text-yellow-700" />
+                                </div>
+
+                                <span className="text-sm text-gray-500">
+                                    Requests
+                                </span>
+                            </div>
+                            <h2 className="text-4xl font-bold text-[#091413] mb-2">
+                                {analytics.pendingBookings}
+                            </h2>
+                            <p className="text-sm text-yellow-600">
+                                Pending booking approvals
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* QUICK ACTIONS */}
+                    <div className="mb-10">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-3xl font-bold text-[#091413]">
+                                Quick Actions
+                            </h2>
+                            <div className="hidden md:flex items-center gap-2 text-[#285A48] font-medium">
+                                Owner Controls
+                                <ArrowRight size={18} />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                            {/* ADD VEHICLE */}
+                            <Link
+                                to="/owner/dashboard/add-vehicle"
+                                className="group bg-[#091413] rounded-[30px] p-7 text-white hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <div className="w-14 h-14 rounded-2xl bg-[#285A48] flex items-center justify-center mb-6">
+                                    <Plus />
+                                </div>
+                                <h3 className="text-2xl font-semibold mb-3">
+                                    Add Vehicle
+                                </h3>
+                                <p className="text-[#B0E4CC] text-sm leading-relaxed mb-6">
+                                    Add and publish a new rental vehicle.
+                                </p>
+                                <div className="flex items-center gap-2 text-sm text-[#B0E4CC]">
+                                    Open Panel
+                                    <ArrowRight size={16} />
+                                </div>
+                            </Link>
+
+                            {/* MANAGE VEHICLES */}
+                            <Link
+                                to="/owner/dashboard/my-vehicles"
+                                className="group bg-[#285A48] rounded-[30px] p-7 text-white hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <div className="w-14 h-14 rounded-2xl bg-[#408A71] flex items-center justify-center mb-6">
+                                    <CarFront />
+                                </div>
+                                <h3 className="text-2xl font-semibold mb-3">
+                                    My Vehicles
+                                </h3>
+                                <p className="text-[#B0E4CC] text-sm leading-relaxed mb-6">
+                                    Manage listed vehicles and availability.
+                                </p>
+                                <div className="flex items-center gap-2 text-sm text-[#B0E4CC]">
+                                    Open Panel
+                                    <ArrowRight size={16} />
+                                </div>
+                            </Link>
+
+                            {/* BOOKINGS */}
+                            <Link
+                                to="/owner/dashboard/booking-requests"
+                                className="bg-white rounded-[30px] p-7 border border-[#dcefe7] hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <div className="w-14 h-14 rounded-2xl bg-[#e7f5ef] flex items-center justify-center mb-6">
+                                    <CalendarCheck className="text-[#285A48]" />
+                                </div>
+                                <h3 className="text-2xl font-semibold mb-3 text-[#091413]">
+                                    Booking Requests
+                                </h3>
+                                <p className="text-gray-500 text-sm leading-relaxed">
+                                    Review and approve booking requests.
+                                </p>
+                            </Link>
+
+                            {/* EARNINGS */}
+                            <div className="bg-white rounded-[30px] p-7 border border-[#dcefe7] hover:-translate-y-1 transition-all duration-300">
+                                <div className="w-14 h-14 rounded-2xl bg-[#B0E4CC] flex items-center justify-center mb-6">
+                                    <Wallet className="text-[#091413]" />
+                                </div>
+                                <h3 className="text-2xl font-semibold mb-3 text-[#091413]">
+                                    Earnings
+                                </h3>
+                                <p className="text-gray-500 text-sm leading-relaxed">
+                                    Track total earnings and booking revenue.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </>
                 <div className="mt-12">
                     <Outlet />
                 </div>

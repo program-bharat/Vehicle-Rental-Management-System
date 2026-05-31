@@ -1,133 +1,134 @@
 import { Link } from "react-router-dom";
 
-const OwnerVehicleCard = ({
-    vehicle,
-    handleDelete,
-    handleToggleAvailability,
-}) => {
-
+const OwnerVehicleCard = ({ vehicle, handleDelete, handleToggleAvailability, }) => {
     return (
         <>
-            <div className="border rounded-2xl overflow-hidden shadow bg-white">
-
+            <div className="bg-white border border-[#dcefe7] rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                 {/* IMAGE */}
-                <img
-                    src={
-                        vehicle.image ||
-                        "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"
-                    }
-                    alt={vehicle.name}
-                    className="w-full h-52 object-cover"
-                />
+                <div className="relative">
+                    <img
+                        src={
+                            vehicle.image ||
+                            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg"
+                        }
+                        alt={vehicle.name}
+                        className="w-full aspect-[4/3] object-cover rounded-3xl"
+                    />
+
+                    <div className="absolute top-3 right-3">
+                        <span
+                            className={`text-xs font-medium px-3 py-1 rounded-full ${vehicle.availability
+                                ? "bg-green-100 text-green-700"
+                                : "bg-red-100 text-red-700"
+                                }`}
+                        >
+                            {vehicle.availability
+                                ? "Available"
+                                : "Unavailable"}
+                        </span>
+                    </div>
+                </div>
 
                 {/* CONTENT */}
-                <div className="p-5">
+                <div className="p-4">
 
-                    {/* TOP */}
-                    <div className="flex items-center justify-between mb-4">
-
-                        <h2 className="text-2xl font-bold">
+                    <div className="mb-4">
+                        <h2 className="text-lg font-bold text-[#091413]">
                             {vehicle.name}
                         </h2>
 
-                        <span className="bg-black text-white px-3 py-1 rounded-full text-sm">
-                            ₹{vehicle.pricePerDay}/day
-                        </span>
-
+                        <p className="text-sm text-gray-500">
+                            {vehicle.brand} {vehicle.model}
+                        </p>
                     </div>
 
                     {/* DETAILS */}
-                    <div className="space-y-2 mb-5">
+                    <div className="space-y-2 mb-4">
 
-                        <p>
-                            <span className="font-semibold">
-                                Brand:
-                            </span>{" "}
-                            {vehicle.brand}
-                        </p>
-
-                        <p>
-                            <span className="font-semibold">
-                                Model:
-                            </span>{" "}
-                            {vehicle.model}
-                        </p>
-
-                        <p>
-                            <span className="font-semibold">
-                                Type:
-                            </span>{" "}
-                            {vehicle.type}
-                        </p>
-
-                        <p>
-                            <span className="font-semibold">
-                                Fuel:
-                            </span>{" "}
-                            {vehicle.fuelType}
-                        </p>
-
-                        <p>
-                            <span className="font-semibold">
-                                Transmission:
-                            </span>{" "}
-                            {vehicle.transmission}
-                        </p>
-
-                        <p>
-                            <span className="font-semibold">
-                                Availability:
-                            </span>{" "}
-
-                            <span
-                                className={
-                                    vehicle.availability
-                                        ? "text-green-600 font-semibold"
-                                        : "text-red-600 font-semibold"
-                                }
-                            >
-                                {
-                                    vehicle.availability
-                                        ? "Available"
-                                        : "Unavailable"
-                                }
+                        <div className="flex items-center justify-between bg-[#f6fbf8] border border-[#e5f3ed] rounded-xl px-3 py-2">
+                            <span className="text-xs text-gray-500">
+                                Vehicle Type
                             </span>
-                        </p>
 
+                            <span className="text-sm font-semibold text-[#091413] capitalize">
+                                {vehicle.type}
+                            </span>
+                        </div>
+
+                        <div className="flex items-center justify-between bg-[#f6fbf8] border border-[#e5f3ed] rounded-xl px-3 py-2">
+                            <span className="text-xs text-gray-500">
+                                Fuel
+                            </span>
+
+                            <span className="text-sm font-semibold text-[#091413]">
+                                {vehicle.fuelType}
+                            </span>
+                        </div>
+
+                        <div className="flex items-center justify-between bg-[#f6fbf8] border border-[#e5f3ed] rounded-xl px-3 py-2">
+                            <span className="text-xs text-gray-500">
+                                Transmission
+                            </span>
+
+                            <span className="text-sm font-semibold text-[#091413]">
+                                {vehicle.transmission}
+                            </span>
+                        </div>
+
+                        <div className="flex items-center justify-between bg-[#f6fbf8] border border-[#e5f3ed] rounded-xl px-3 py-2">
+                            <span className="text-xs text-gray-500">
+                                Price
+                            </span>
+
+                            <span className="text-sm font-bold text-[#285A48]">
+                                ₹{vehicle.pricePerDay}/day
+                            </span>
+                        </div>
+
+                        <div className="flex items-center justify-between bg-[#f6fbf8] border border-[#e5f3ed] rounded-xl px-3 py-2">
+                            <span className="text-xs text-gray-500">
+                                Status
+                            </span>
+                            <span
+                                className={`text-sm font-semibold ${vehicle.availability
+                                    ? "text-green-600"
+                                    : "text-red-600"
+                                    }`}
+                            >
+                                {vehicle.availability
+                                    ? "Available"
+                                    : "Unavailable"}
+                            </span>
+                        </div>
                     </div>
 
                     {/* ACTIONS */}
-                    <div className="flex flex-wrap gap-3">
-
+                    <div className="grid grid-cols-3 gap-2">
                         <Link
                             to={`/owner/dashboard/edit-vehicle/${vehicle._id}`}
-                            className="bg-blue-600 text-white px-4 py-2 rounded-xl cursor-pointer"
+                            className="bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-xl text-sm font-medium transition-all duration-300"
                         >
                             Edit
                         </Link>
-
                         <button
                             onClick={() => handleDelete(vehicle._id)}
-                            className="bg-red-600 text-white px-4 py-2 rounded-xl cursor-pointer"
+                            className="bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer"
                         >
                             Delete
                         </button>
-
                         <button
                             onClick={() => handleToggleAvailability(vehicle._id)}
-                            className="bg-gray-800 text-white px-4 py-2 rounded-xl cursor-pointer"
+                            className={`text-white py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer ${vehicle.availability
+                                ? "bg-red-600 hover:bg-red-700"
+                                : "bg-green-600 hover:bg-green-700"
+                                }`}
                         >
-                            {
-                                vehicle.availability
-                                    ? "Disable"
-                                    : "Enable"
-                            }
+                            {vehicle.availability
+                                ? "Disable"
+                                : "Enable"}
                         </button>
-
                     </div>
-
                 </div>
-
             </div>
         </>
     );

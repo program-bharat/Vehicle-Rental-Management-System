@@ -23,6 +23,7 @@ import AddVehicle from "./pages/owner/AddVehicle";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageVehicles from "./pages/admin/ManageVehicles";
+import ContactMessages from "./pages/admin/ContactMessages";
 
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
@@ -94,6 +95,8 @@ const App = () => {
           >
             <Route path="users" element={<ManageUsers />} />
             <Route path="vehicles" element={<ManageVehicles />} />
+            <Route path="contacts" element={<ContactMessages />} />
+            <Route path="bookings" element={<MyBookings />} />
           </Route>
         </Route>
       </Routes>

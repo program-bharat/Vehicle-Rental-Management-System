@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import {
-    Users, CarFront, BadgeCheck, CalendarCheck, IndianRupee, Clock3, ShieldCheck, ArrowRight,
+    Users, CarFront, BadgeCheck, CalendarCheck, IndianRupee, Clock3, ShieldCheck, ArrowRight, MessageSquare
 } from "lucide-react";
 
 import { getAdminDashboardStats } from "../../api/userAPI";
@@ -342,29 +342,36 @@ const AdminDashboard = () => {
                                 <ArrowRight size={16} />
                             </div>
                         </Link>
-                        <div className="bg-white rounded-[30px] p-7 border border-[#dcefe7]">
+                        <Link
+                            to="bookings"
+                            className="group bg-[#F8FCFA] border border-[#285A48] rounded-[30px] p-7 hover:bg-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                        >
                             <div className="w-14 h-14 rounded-2xl bg-[#e7f5ef] flex items-center justify-center mb-6">
                                 <CalendarCheck className="text-[#285A48]" />
                             </div>
+
                             <h3 className="text-2xl font-semibold mb-3 text-[#091413]">
                                 View Bookings
                             </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed">
+
+                            <p className="text-gray-600 text-sm leading-relaxed">
                                 Monitor latest bookings and customer activity.
                             </p>
-                        </div>
-
-                        <div className="bg-white rounded-[30px] p-7 border border-[#dcefe7]">
+                        </Link>
+                        <Link
+                            to="/admin/dashboard/contacts"
+                            className="group bg-[#285A48] rounded-[30px] p-7 text-white hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
+                        >
                             <div className="w-14 h-14 rounded-2xl bg-[#B0E4CC] flex items-center justify-center mb-6">
-                                <ShieldCheck className="text-[#091413]" />
+                                <MessageSquare className="text-[#091413]" />
                             </div>
-                            <h3 className="text-2xl font-semibold mb-3 text-[#091413]">
-                                Manage Owners
+                            <h3 className="text-2xl font-semibold mb-3 text-white">
+                                Contact Messages
                             </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed">
-                                Handle owner verification and approval workflow.
+                            <p className="text-[#D6EFE3] text-sm leading-relaxed">
+                                View, manage and delete messages submitted by users and owners.
                             </p>
-                        </div>
+                        </Link>
                     </div>
                 </div>
                 {/* OUTLET */}
