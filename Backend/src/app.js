@@ -7,6 +7,7 @@ const authRoute = require('./routes/authRoute')
 const vehicleRoute = require('./routes/vehicleRoute')
 const userRoute = require('./routes/userRoute')
 const bookingRoute = require('./routes/bookingRoute');
+const contactRoute = require('./routes/contactRoute');
 const { errorHandler } = require('./middlewares/errorMiddleware');
 
 // Middleware
@@ -17,6 +18,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/vehicles", vehicleRoute);
 app.use("/api/users", userRoute);
 app.use("/api/bookings", bookingRoute);
+app.use("/api/contact", contactRoute);
 
 // Error Handler
 app.use(errorHandler)

@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
-
+import { toast } from "react-toastify";
+import { sendContactMessage } from "../api/contactAPI";
+import { useSelector } from "react-redux";
 const Contact = () => {
+    const { user, role } = useSelector(
+        (state) => state.auth
+    );
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
+        name: user?.name || "",
+        email: user?.email || "",
         subject: "",
         message: "",
     });
-
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -16,17 +20,20 @@ const Contact = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log(formData);
-
-        setFormData({
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-        });
+        try {
+            await sendContactMessage(formData);
+            toast.success("Message Sent Successfully");
+            setFormData({
+                name: user?.name || "",
+                email: user?.email || "",
+                subject: "",
+                message: "",
+            });
+        } catch (error) {
+            toast.error(error);
+        }
     };
 
     return (
@@ -56,7 +63,6 @@ const Contact = () => {
                     {/* CONTACT SECTION */}
                     <section>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                            {/* CONTACT INFO */}
                             <div className="space-y-6">
 
                                 <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
@@ -108,66 +114,66 @@ const Contact = () => {
                             </div>
 
                             {/* FORM */}
-                            <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
-                                <h2 className="text-3xl font-bold text-[#091413] mb-6">
-                                    Send Us A Message
-                                </h2>
+                            {
+                                role === "admin" ? (
+                                    <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8 flex items-center justify-center">
 
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className="space-y-5"
-                                >
+                                        <h2 className="text-2xl font-semibold text-center text-gray-600">
+                                            Admins cannot send contact messages.
+                                        </h2>
+                                    </div>
+                                ) : (
+                                    <div className="bg-white border border-[#D6EFE3] rounded-3xl p-8">
 
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Enter Your Name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full border border-[#D6EFE3] p-4 rounded-xl outline-none focus:border-[#408A71]"
-                                        required
-                                    />
-
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Enter Your Email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full border border-[#D6EFE3] p-4 rounded-xl outline-none focus:border-[#408A71]"
-                                        required
-                                    />
-
-                                    <input
-                                        type="text"
-                                        name="subject"
-                                        placeholder="Enter Subject"
-                                        value={formData.subject}
-                                        onChange={handleChange}
-                                        className="w-full border border-[#D6EFE3] p-4 rounded-xl outline-none focus:border-[#408A71]"
-                                        required
-                                    />
-
-                                    <textarea
-                                        name="message"
-                                        placeholder="Write Your Message"
-                                        rows="6"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        className="w-full border border-[#D6EFE3] p-4 rounded-xl outline-none resize-none focus:border-[#408A71]"
-                                        required
-                                    />
-
-                                    <button
-                                        type="submit"
-                                        className="bg-[#091413] hover:bg-[#285A48] text-white px-7 py-3 rounded-xl transition cursor-pointer w-full mt-5"
-                                    >
-                                        Send Message
-                                    </button>
-
-                                </form>
-                            </div>
-
+                                        <h2 className="text-3xl font-bold text-[#091413] mb-6">
+                                            Send Us A Message
+                                        </h2>
+                                        <form
+                                            onSubmit={handleSubmit}
+                                            className="space-y-5"
+                                        >
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={formData.name}
+                                                readOnly
+                                                className="w-full border border-[#D6EFE3] p-4 rounded-xl bg-gray-100"
+                                            />
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                readOnly
+                                                className="w-full border border-[#D6EFE3] p-4 rounded-xl bg-gray-100"
+                                            />
+                                            <input
+                                                type="text"
+                                                name="subject"
+                                                placeholder="Enter Subject"
+                                                value={formData.subject}
+                                                onChange={handleChange}
+                                                className="w-full border border-[#D6EFE3] p-4 rounded-xl outline-none focus:border-[#408A71]"
+                                                required
+                                            />
+                                            <textarea
+                                                name="message"
+                                                placeholder="Write Your Message"
+                                                rows="6"
+                                                value={formData.message}
+                                                onChange={handleChange}
+                                                className="w-full border border-[#D6EFE3] p-4 rounded-xl outline-none resize-none focus:border-[#408A71]"
+                                                required
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="bg-[#091413] hover:bg-[#285A48] text-white px-7 py-3 rounded-xl transition cursor-pointer w-full mt-5"
+                                            >
+                                                Send Message
+                                            </button>
+                                        </form>
+                                    </div>
+                                )
+                            }
                         </div>
                     </section>
                     {/* FAQ SECTION */}
