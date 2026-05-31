@@ -18,7 +18,7 @@ const BookingRequests = () => {
             try {
                 setLoading(true);
                 const res = await getBookings();
-                setBookings(res.data.data);
+                setBookings([...res.data.data].reverse());
             } catch (error) {
                 console.log(error);
                 setError(
@@ -97,7 +97,7 @@ const BookingRequests = () => {
                             No Booking Requests Found
                         </h2>
                     ) : (
-                        <div className="space-y-5">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                             {
                                 bookings.map((booking) => (
 
