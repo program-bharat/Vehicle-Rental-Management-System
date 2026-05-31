@@ -125,7 +125,7 @@ const Home = () => {
                 <section className="mb-20">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-bold text-[#091413] mb-3">
-                            Why Choose RentiGo
+                            Why Choose RentWheel
                         </h2>
                         <p className="text-gray-500">
                             Trusted by thousands of customers

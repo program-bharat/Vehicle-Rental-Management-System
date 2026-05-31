@@ -15,7 +15,7 @@ const Footer = () => {
                         {/* BRAND */}
                         <div>
                             <h2 className="text-3xl font-bold mb-4">
-                                RentiGo
+                                RentWheel
                             </h2>
                             <p className="text-gray-300 leading-7 text-sm">
                                 Premium vehicle rental platform for seamless
@@ -87,7 +87,7 @@ const Footer = () => {
                                 </button>
                             </div>
                             <p className="text-gray-300 text-sm">
-                                support@rentigo.com
+                                support@rentwheel.com
                             </p>
                         </div>
 
@@ -95,7 +95,7 @@ const Footer = () => {
                     {/* BOTTOM */}
                     <div className="border-t border-[#285A48] mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-gray-300 text-sm">
                         <p>
-                            © 2026 RentiGo. All rights reserved.
+                            © 2026 RentWheel. All rights reserved.
                         </p>
                         <div className="flex items-center gap-5">
                             <Link

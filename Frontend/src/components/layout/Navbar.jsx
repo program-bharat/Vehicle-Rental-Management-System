@@ -71,7 +71,7 @@ const Navbar = () => {
                         to="/"
                         className="text-3xl font-bold tracking-tight text-white"
                     >
-                        RentiGo
+                        RentWheel
                     </Link>
                     <div className="hidden md:flex items-center gap-8 text-[16px] font-medium text-white">
 

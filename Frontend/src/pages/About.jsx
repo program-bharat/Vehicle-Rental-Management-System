@@ -10,13 +10,13 @@ const About = () => {
                     <section className="bg-[#091413] text-white rounded-3xl px-8 py-16">
                         <div className="max-w-4xl">
                             <p className="text-[#B0E4CC] font-semibold mb-4">
-                                About RentiGo
+                                About RentWheel
                             </p>
                             <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
                                 Redefining Vehicle Rentals Across Cities
                             </h1>
                             <p className="text-lg text-gray-300 leading-8">
-                                RentiGo is a modern vehicle rental platform
+                                RentWheel is a modern vehicle rental platform
                                 designed to make renting cars and bikes simple,
                                 affordable, and accessible for everyone.
                             </p>
@@ -37,10 +37,10 @@ const About = () => {
                                     Our Story
                                 </p>
                                 <h2 className="text-4xl font-bold text-[#091413] mb-6">
-                                    Why RentiGo Was Created
+                                    Why RentWheel Was Created
                                 </h2>
                                 <p className="text-gray-600 leading-8 mb-5">
-                                    RentiGo started with a simple idea —
+                                    RentWheel started with a simple idea —
                                     making premium vehicle rentals easier,
                                     safer, and more transparent.
                                 </p>
@@ -198,7 +198,7 @@ const About = () => {
                                 Meet Our Team
                             </h2>
                             <p className="text-gray-500">
-                                Passionate people behind RentiGo
+                                Passionate people behind RentWheel
                             </p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

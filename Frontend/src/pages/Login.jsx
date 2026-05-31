@@ -60,7 +60,7 @@ const Login = () => {
                             Welcome Back!
                         </h1>
                         <p className="text-gray-500 mt-2 text-sm">
-                            Login to continue your journey with RentiGo
+                            Login to continue your journey with RentWheel
                         </p>
                     </div>
                     <form

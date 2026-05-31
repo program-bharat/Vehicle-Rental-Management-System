@@ -45,7 +45,7 @@ const Contact = () => {
                     <section className="bg-[#091413] text-white rounded-3xl px-8 py-16">
                         <div className="max-w-4xl">
                             <p className="text-[#B0E4CC] font-semibold mb-4">
-                                Contact RentiGo
+                                Contact RentWheel
                             </p>
 
                             <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -71,7 +71,7 @@ const Contact = () => {
                                     </h3>
 
                                     <p className="text-gray-600">
-                                        support@rentigo.com
+                                        support@rentwheel.com
                                     </p>
                                 </div>
 
@@ -91,7 +91,7 @@ const Contact = () => {
                                     </h3>
 
                                     <p className="text-gray-600 leading-7">
-                                        RentiGo Headquarters,
+                                        RentWheel Headquarters,
                                         Sector 62, Noida,
                                         Uttar Pradesh, India
                                     </p>
@@ -196,7 +196,7 @@ const Contact = () => {
                                     </span>
                                 </summary>
                                 <div className="px-6 pb-5 text-gray-600 leading-7">
-                                    Yes, a valid driving license is mandatory for renting any vehicle on RentiGo.
+                                    Yes, a valid driving license is mandatory for renting any vehicle on RentWheel.
                                 </div>
                             </details>
 

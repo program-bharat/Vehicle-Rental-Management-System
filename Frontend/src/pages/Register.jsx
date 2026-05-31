@@ -48,7 +48,7 @@ const Register = () => {
                             Create Account
                         </h1>
                         <p className="text-gray-500 mt-2 text-sm">
-                            Join RentiGo and start booking vehicles easily
+                            Join RentWheel and start booking vehicles easily
                         </p>
                     </div>
                     <form
